@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AddCard</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="cvv_header">CVV</string>
+    <string name="cvv_desc">A three-digit code on your credit card, you can find this on the back of your card.</string>
+    <string name="exp_header">Expiration Date</string>
+    <string name="pin_header">Card Pin</string>
+    <string name="verification_error">Sorry,something went wrong</string>
+    <string name="verification_details">Please contact your bank for more details, or try adding a different payment method</string>
+    <string name="exp_details">You should be able to find this date on the front of your card, under your card number.</string>
+    <string name="pin_details">You can\'t find this on the card. It is a 4 digit security pin to authorised card transactions.\nYou might have to contact your bank if you\'ve forgotten the pin</string>
+</resources>
