@@ -77,7 +77,7 @@ public abstract class CardNumberTextWatcher implements TextWatcher {
             moveToNext = false;
         }
         mCardTextInputLayout.setHasValidInput(moveToNext);
-        onValidated(moveToNext);
+        onValidated(moveToNext, currentText);
 
     }
 
@@ -92,10 +92,10 @@ public abstract class CardNumberTextWatcher implements TextWatcher {
         InputFilter[] FilterArray = new InputFilter[1];
         if (card != null) {
             int maxLength = Integer.parseInt(String.valueOf(card.getMaxLength()));
-            FilterArray[0] = new InputFilter.LengthFilter(maxLength + SPACE_NUMBER);
+            FilterArray[0] = new InputFilter.LengthFilter(getSpacedPanLength(maxLength));
             mCardTextInputLayout.getEditText().setCompoundDrawablesRelativeWithIntrinsicBounds(ContextCompat.getDrawable(mCardTextInputLayout.getContext(), card.getDrawable()), null, null, null);
         } else {
-            FilterArray[0] = new InputFilter.LengthFilter(19 + SPACE_NUMBER);
+            FilterArray[0] = new InputFilter.LengthFilter(getSpacedPanLength(19));
             mCardTextInputLayout.getEditText().setCompoundDrawablesRelativeWithIntrinsicBounds(ContextCompat.getDrawable(mCardTextInputLayout.getContext(), R.drawable.payment_method_generic_card), null, null, null);
         }
 
@@ -104,7 +104,11 @@ public abstract class CardNumberTextWatcher implements TextWatcher {
         return card;
     }
 
-    public abstract void onValidated(boolean moveToNext);
+    private int getSpacedPanLength(int length) {
+        return (length % 4 == 0) ? length + (length / 4) - 1 : length + (length / 4);
+    }
 
-    int SPACE_NUMBER = 3;
+    public abstract void onValidated(boolean moveToNext, String cardPan);
+
+
 }

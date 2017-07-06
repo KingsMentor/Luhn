@@ -5,7 +5,7 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddCard">
+    tools:context=".Luhn">
 
 
     <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="xyz.belvi.addcard.AddCard">
+        tools:context="xyz.belvi.addcard.Luhn">
 
 
         <android.support.v7.widget.Toolbar

@@ -44,7 +44,8 @@ public abstract class CvvTextWatcher implements TextWatcher {
             e.printStackTrace();
         }
         mCardTextInputLayout.setHasValidInput(moveToNext);
-        onValidated(moveToNext);
+        String text = mCardTextInputLayout.getEditText().getText().toString();
+        onValidated(moveToNext, Integer.parseInt(text.isEmpty() ? "0" : text));
 
     }
 
@@ -57,5 +58,5 @@ public abstract class CvvTextWatcher implements TextWatcher {
         return source.toString().length() == 3;
     }
 
-    public abstract void onValidated(boolean moveToNext);
+    public abstract void onValidated(boolean moveToNext, int pin);
 }

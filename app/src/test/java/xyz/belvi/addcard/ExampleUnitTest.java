@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        CardValidator cardValidator = new CardValidator("6763146740148056");
-        assertEquals(true,cardValidator.validate());
+        CardValidator cardValidator = new CardValidator("5399832631479478");
+        assertEquals(true,cardValidator.isValidCardNumber());
     }
 }

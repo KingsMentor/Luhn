@@ -1,12 +1,17 @@
 package xyz.belvi.addcard;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -16,7 +21,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
 import io.card.payment.CardIOActivity;
+import io.card.payment.CreditCard;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import xyz.belvi.addcard.cardValidator.LuhnCard;
 import xyz.belvi.addcard.customTextInputLayout.CardNumberTextWatcher;
 import xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout;
 import xyz.belvi.addcard.customTextInputLayout.CvvTextWatcher;
@@ -24,14 +31,28 @@ import xyz.belvi.addcard.customTextInputLayout.ExpiringDateTextWatcher;
 import xyz.belvi.addcard.customTextInputLayout.PinTextInputLayout;
 import xyz.belvi.addcard.customTextInputLayout.PinTextWatcher;
 
-public class AddCard extends BaseActivity {
+public class Luhn extends BaseActivity {
 
     private LinearLayout llBottomSheet;
     private BottomSheetBehavior bottomSheetBehavior;
     private final int CARDIO_REQUEST_ID = 555;
     private CardVerificationProgressScreen progressScreen;
+    private static LuhnCardVerifier mLuhnCardVerifier;
 
+    private int expMonth;
+    private int cvv;
+    private int expYear;
+    private int pin;
+    private String cardPan;
 
+    public interface LuhnCardVerifier {
+        void onCardVerified(LuhnCard creditCard);
+    }
+
+    public static void startLuhn(Context context, LuhnCardVerifier cardVerifier) {
+        mLuhnCardVerifier = cardVerifier;
+        context.startActivity(new Intent(context, Luhn.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +69,10 @@ public class AddCard extends BaseActivity {
         findViewById(R.id.btn_proceed).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                registerCallBackListener();
                 progressScreen = new CardVerificationProgressScreen();
                 progressScreen.show(getSupportFragmentManager(), "");
-//                showInfo(R.string.verification_error, R.string.verification_details, R.drawable.payment_bank_pin, true);
+                mLuhnCardVerifier.onCardVerified(new LuhnCard(cardPan, expMonth, expYear, cvv, pin));
             }
         });
     }
@@ -92,7 +114,8 @@ public class AddCard extends BaseActivity {
                 });
                 cardNumber.getEditText().addTextChangedListener(new CardNumberTextWatcher(cardNumber) {
                     @Override
-                    public void onValidated(boolean moveToNext) {
+                    public void onValidated(boolean moveToNext, String cardNumberPan) {
+                        cardPan = cardNumberPan;
                         if (moveToNext) {
                             findViewById(R.id.tiet_exp_input).requestFocus();
                         }
@@ -127,6 +150,7 @@ public class AddCard extends BaseActivity {
                 }
             }
         });
+
         expiryInputLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -139,7 +163,9 @@ public class AddCard extends BaseActivity {
                 });
                 expiryInputLayout.getEditText().addTextChangedListener(new ExpiringDateTextWatcher(expiryInputLayout) {
                     @Override
-                    public void onValidated(boolean moveToNext) {
+                    public void onValidated(boolean moveToNext, int expMonthValue, int expYearValue) {
+                        expMonth = expMonthValue;
+                        expYear = expYearValue;
                         if (moveToNext) {
                             findViewById(R.id.tiet_cvv_input).requestFocus();
                             expiryInputLayout.setError("");
@@ -169,7 +195,8 @@ public class AddCard extends BaseActivity {
                 });
                 cvvInputLayout.getEditText().addTextChangedListener(new CvvTextWatcher(cvvInputLayout) {
                     @Override
-                    public void onValidated(boolean moveToNext) {
+                    public void onValidated(boolean moveToNext, int cvvValue) {
+                        cvv = cvvValue;
                         if (moveToNext)
                             findViewById(R.id.tiet_pin_input).requestFocus();
                         enableNextBtn();
@@ -194,7 +221,8 @@ public class AddCard extends BaseActivity {
                 });
                 pinInputLayout.getEditText().addTextChangedListener(new PinTextWatcher(pinInputLayout) {
                     @Override
-                    public void onValidated(boolean moveToNext) {
+                    public void onValidated(boolean moveToNext, int pinValue) {
+                        pin = pinValue;
                         enableNextBtn();
                     }
                 });
@@ -217,7 +245,7 @@ public class AddCard extends BaseActivity {
 
         // customize these values to suit your needs.
         scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true); // default: false
-        scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, false); // default: false
+        scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true); // default: false
         scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, false); // default: false
         scanIntent.putExtra(CardIOActivity.EXTRA_USE_CARDIO_LOGO, true); // default: false
         scanIntent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true); // default: false
@@ -233,6 +261,10 @@ public class AddCard extends BaseActivity {
     }
 
     private void showInfo(@StringRes int header, @StringRes int desc, @DrawableRes int drawable, boolean error) {
+        showInfo(getString(header), getString(desc), ContextCompat.getDrawable(this, drawable), false);
+    }
+
+    private void showInfo(String header, String desc, @Nullable Drawable drawable, boolean error) {
         hideKeyboard();
         AppCompatTextView infoHeader = (AppCompatTextView) llBottomSheet.findViewById(R.id.info_header);
         AppCompatTextView infoDesc = (AppCompatTextView) llBottomSheet.findViewById(R.id.info_desc);
@@ -245,9 +277,10 @@ public class AddCard extends BaseActivity {
             ((AppCompatButton) findViewById(R.id.ok_dimiss)).setText("Ok");
         }
 
-        infoHeader.setText(getString(header));
-        infoDesc.setText(getString(desc));
-        infoImg.setImageDrawable(ContextCompat.getDrawable(this, drawable));
+        infoHeader.setText(header);
+        infoDesc.setText(desc);
+        if (drawable != null)
+            infoImg.setImageDrawable(drawable);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 
@@ -283,14 +316,65 @@ public class AddCard extends BaseActivity {
     }
 
     void enableNextBtn() {
-        findViewById(R.id.btn_proceed).setEnabled(cvvInputLayout.hasValidInput() && expiryInputLayout.hasValidInput() && cardNumber.hasValidInput());
+        findViewById(R.id.btn_proceed).setEnabled(cvvInputLayout.hasValidInput() && expiryInputLayout.hasValidInput() && cardNumber.hasValidInput() && pinInputLayout.hasValidInput());
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CARDIO_REQUEST_ID) {
+            if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
+                CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
 
+                // Never log a raw card number. Avoid displaying it, but if necessary use getFormattedCardNumber()
+                cardNumber.getEditText().setText(scanResult.getRedactedCardNumber());
+
+
+                // Do something with the raw number, e.g.:
+                // myService.setCardNumber( scanResult.cardNumber );
+
+                if (scanResult.isExpiryValid()) {
+                    expiryInputLayout.getEditText().setText(scanResult.expiryMonth + "/" + scanResult.expiryYear);
+                }
+
+                if (scanResult.cvv != null) {
+                    // Never log or display a CVV
+                    cvvInputLayout.getEditText().setText(scanResult.cvv);
+                }
+
+            }
         }
+    }
+
+    private void registerCallBackListener() {
+        LocalBroadcastManager.getInstance(this).registerReceiver(callBackReceiver, new IntentFilter(CallbackFilter));
+    }
+
+
+    private static final String CallbackFilter = "xyz.belvi.Luhn.callBackReceiver";
+    private static final String CallbackDataStatus = "xyz.belvi.Luhn.DataStatus";
+    private static final String CallbackFilterDataErrorTitle = "xyz.belvi.Luhn.DataErrorTitle";
+    private static final String CallbackFilterDataErrorMessage = "xyz.belvi.Luhn.DataErrorMessage";
+    private BroadcastReceiver callBackReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getBooleanExtra(CallbackDataStatus, false)) {
+                finish();
+            } else {
+                String title = intent.getStringExtra(CallbackFilterDataErrorTitle);
+                String message = intent.getStringExtra(CallbackFilterDataErrorMessage);
+                showInfo(title, message, null, false);
+            }
+            LocalBroadcastManager.getInstance(context).unregisterReceiver(this);
+        }
+    };
+
+    public static void verificationStatus(Context context, boolean isSuccessFul, String errorTitle, String errorMessage) {
+        LocalBroadcastManager.getInstance(context).sendBroadcast(
+                new Intent(CallbackFilter)
+                        .putExtra(CallbackDataStatus, isSuccessFul)
+                        .putExtra(CallbackFilterDataErrorTitle, errorTitle)
+                        .putExtra(CallbackFilterDataErrorMessage, errorMessage)
+        );
     }
 }

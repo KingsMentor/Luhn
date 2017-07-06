@@ -34,8 +34,11 @@ public class CardValidator {
 
     private int addAllNumber() {
         int sum = 0;
-        for (int i = cardNumber.length() - 1; i >= 0; i--) {
-            sum += multiplyOddByTwo(i + 1, Integer.parseInt(String.valueOf(cardNumber.charAt(i))));
+        for (int i = 0; i < cardNumber.length(); i++) {
+            if (cardNumber.length() % 2 != 0)
+                sum += multiplyOddByTwo(i + 1, Integer.parseInt(String.valueOf(cardNumber.charAt(i))));
+            else
+                sum += multiplyOddByTwo(i, Integer.parseInt(String.valueOf(cardNumber.charAt(i))));
         }
         return sum;
     }

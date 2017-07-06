@@ -39,7 +39,7 @@ public abstract class ExpiringDateTextWatcher implements TextWatcher {
         }
 
         mCardTextInputLayout.setHasValidInput(moveToNext);
-        onValidated(moveToNext);
+        onValidated(moveToNext, expMonth, expYear);
 
 
         try {
@@ -85,6 +85,8 @@ public abstract class ExpiringDateTextWatcher implements TextWatcher {
         return source;
     }
 
+    static int expMonth, expYear;
+
     public static boolean isValidExpiringDate(String expDate) {
         try {
             if (expDate.length() != 5)
@@ -96,8 +98,8 @@ public abstract class ExpiringDateTextWatcher implements TextWatcher {
             String expMonthDate[] = expDate.split("/");
             if (expMonthDate[0].length() != 2)
                 return false;
-            int expMonth = Integer.parseInt(expMonthDate[0]);
-            int expYear = Integer.parseInt(expMonthDate[1]);
+            expMonth = Integer.parseInt(expMonthDate[0]);
+            expYear = Integer.parseInt(expMonthDate[1]);
             return year < expYear ? true : year == expYear ? month < expMonth : false;
         } catch (Exception e) {
             return false;
@@ -105,5 +107,5 @@ public abstract class ExpiringDateTextWatcher implements TextWatcher {
 
     }
 
-    public abstract void onValidated(boolean moveToNext);
+    public abstract void onValidated(boolean moveToNext, int month, int year);
 }
