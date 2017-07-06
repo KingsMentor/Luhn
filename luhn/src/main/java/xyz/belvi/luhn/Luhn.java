@@ -233,7 +233,7 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
                     @Override
                     public void onValidated(boolean moveToNext, int cvvValue) {
                         cvv = cvvValue;
-                        if (moveToNext)
+                        if (moveToNext && retrievePin)
                             findViewById(R.id.tiet_pin_input).requestFocus();
                         enableNextBtn();
                     }

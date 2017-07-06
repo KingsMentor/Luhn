@@ -93,7 +93,6 @@
                             android:imeOptions="actionNext"
                             android:inputType="textPassword"
                             android:maxLength="5"
-                            android:nextFocusRight="@id/tiet_cvv_input"
                             android:textSize="16sp"
                             app:theme="@style/MyTextInputEdit" />
                     </xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout>
