@@ -74,12 +74,29 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initStyle(getIntent().getIntExtra(StyleKey, R.style.LuhnStyle));
         setContentView(R.layout.activity_add_card);
+        initStyle(getIntent().getIntExtra(StyleKey, R.style.LuhnStyle));
         attachKeyboardListeners(R.id.root_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+    }
+
+    private boolean retrievePin;
+
+    private void initStyle(int style) {
+        TypedArray ta = obtainStyledAttributes(style, R.styleable.luhnStyle);
+        String fontName = ta.getString(R.styleable.luhnStyle_luhn_typeface);
+        includeCalligraphy(fontName);
+        initViews();
+        retrievePin = ta.getBoolean(R.styleable.luhnStyle_luhn_show_pin, false);
+        findViewById(R.id.btn_proceed).setBackground(ta.getDrawable(R.styleable.luhnStyle_luhn_btn_verify_selector));
+        findViewById(R.id.toolbar).setBackgroundColor(ta.getColor(R.styleable.luhnStyle_luhn_show_toolbar_color, ContextCompat.getColor(this, R.color.colorAccent)));
+    }
+
+    private void initViews() {
         initCardField();
         initBottomSheet();
         initExpiryDateField();
@@ -94,14 +111,6 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
                     sLuhnCallback.cardDetailsRetrieved(new LuhnCard(cardPan, expMonth, expYear, cvv, pin), Luhn.this);
             }
         });
-
-
-    }
-
-    private void initStyle(int style) {
-        TypedArray ta = obtainStyledAttributes(style, R.styleable.luhnStyle);
-        String fontName = ta.getString(R.styleable.luhnStyle_luhn_typeface);
-        includeCalligraphy(fontName);
     }
 
     private void initBottomSheet() {
@@ -239,6 +248,7 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
         pinInputLayout.post(new Runnable() {
             @Override
             public void run() {
+                pinInputLayout.setVisibility(retrievePin ? View.VISIBLE : View.GONE);
                 pinInputLayout.getPasswordToggleView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -343,7 +353,10 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
     }
 
     void enableNextBtn() {
-        findViewById(R.id.btn_proceed).setEnabled(cvvInputLayout.hasValidInput() && expiryInputLayout.hasValidInput() && cardNumber.hasValidInput() && pinInputLayout.hasValidInput());
+        if (retrievePin)
+            findViewById(R.id.btn_proceed).setEnabled(cvvInputLayout.hasValidInput() && expiryInputLayout.hasValidInput() && cardNumber.hasValidInput() && pinInputLayout.hasValidInput());
+        else
+            findViewById(R.id.btn_proceed).setEnabled(cvvInputLayout.hasValidInput() && expiryInputLayout.hasValidInput() && cardNumber.hasValidInput());
     }
 
     @Override

@@ -15,7 +15,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat">
+    <style name="ToolbarStyle" parent="@style/AppTheme">
         <item name="colorControlHighlight">@color/white</item>
         <item name="colorControlNormal">@color/white</item>
     </style>
@@ -26,7 +26,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/red</item>
+        <item name="android:textColor">@color/error_red</item>
         <item name="android:textSize">14sp</item>
     </style>
 
@@ -46,7 +46,7 @@
 
     <style name="ErrorTextStyle" parent="@android:style/TextAppearance">
         <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/red</item>
+        <item name="android:textColor">@color/error_red</item>
     </style>
 
     <style name="loadingStyle" parent="AppTheme">
@@ -57,6 +57,9 @@
     <style name="LuhnStyle">
         <item name="luhn_title">Add Card</item>
         <item name="luhn_typeface">fonts/ClanMedium.ttf</item>
+        <item name="luhn_btn_verify_selector">@drawable/card_next_btn_selector</item>
+        <item name="luhn_show_toolbar_color">@color/colorAccent</item>
+        <item name="luhn_show_pin">true</item>
     </style>
 
 </resources>
