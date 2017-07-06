@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Luhn">
+
+
+    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="xyz.belvi.addcard.Luhn">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginBottom="16sp"
+            android:background="?attr/colorPrimary"
+            app:theme="@style/ToolbarStyle"
+            app:titleTextColor="@color/white" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fillViewport="true">
+
+            <android.support.v7.widget.LinearLayoutCompat
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+
+                <xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout
+                    android:id="@+id/cti_card_number_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Card Number"
+                    android:textColorHint="#aaaaaa"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/ErrorTextStyle"
+                    app:passwordToggleDrawable="@drawable/password_selector"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@null"
+                    app:theme="@style/MyTextInputLayout">
+
+                    <android.support.design.widget.TextInputEditText
+                        fontPath="fonts/RobotoBold.ttf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@drawable/payment_method_generic_card"
+                        android:fontFamily="serif"
+                        android:inputType="textPassword"
+                        android:textSize="16sp"
+                        app:theme="@style/MyTextInputEdit" />
+
+                </xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout>
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout
+                        android:id="@+id/ctil_expiry_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:hint="MM/YY"
+                        app:errorEnabled="true"
+                        app:errorTextAppearance="@style/ErrorTextStyle"
+                        app:passwordToggleDrawable="@drawable/payment_bank_card_info"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@null"
+                        app:theme="@style/MyTextInputLayout">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/tiet_exp_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="8dp"
+                            android:imeOptions="actionNext"
+                            android:inputType="textPassword"
+                            android:maxLength="5"
+                            android:nextFocusRight="@id/tiet_cvv_input"
+                            android:textSize="16sp"
+                            app:theme="@style/MyTextInputEdit" />
+                    </xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout>
+
+                    <xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout
+                        android:id="@+id/ctil_cvv_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:hint="CVV"
+                        android:textColorHint="#aaaaaa"
+                        app:errorEnabled="true"
+                        app:errorTextAppearance="@style/ErrorTextStyle"
+                        app:passwordToggleDrawable="@drawable/payment_bank_card_info"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@null"
+                        app:theme="@style/MyTextInputLayout">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/tiet_cvv_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="8dp"
+                            android:inputType="textPassword"
+                            android:maxLength="3"
+                            android:textSize="16sp"
+                            app:theme="@style/MyTextInputEdit" />
+                    </xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout>
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+
+                <xyz.belvi.addcard.customTextInputLayout.PinTextInputLayout
+                    android:id="@+id/ctil_pin_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Card Pin"
+                    android:textColorHint="#aaaaaa"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/ErrorTextStyle"
+                    app:passwordToggleDrawable="@drawable/payment_bank_card_info"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@null"
+                    app:theme="@style/MyTextInputLayout">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/tiet_pin_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:inputType="textPassword"
+                        android:maxLength="4"
+                        android:textSize="16sp"
+                        app:theme="@style/MyTextInputEdit" />
+                </xyz.belvi.addcard.customTextInputLayout.PinTextInputLayout>
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_proceed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="16dp"
+            android:background="@drawable/card_next_btn_selector"
+            android:clickable="false"
+            android:enabled="false"
+            android:padding="16dp"
+            android:text="Next"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"
+        android:clickable="true"
+        android:orientation="vertical"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+        <include layout="@layout/card_info_layout" />
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
