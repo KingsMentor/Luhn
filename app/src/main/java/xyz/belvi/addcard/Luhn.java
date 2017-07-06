@@ -16,6 +16,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
@@ -58,9 +59,10 @@ public class Luhn extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         attachKeyboardListeners(R.id.root_layout);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initCardField();
         initBottomSheet();
         initExpiryDateField();
@@ -72,7 +74,7 @@ public class Luhn extends BaseActivity {
                 registerCallBackListener();
                 progressScreen = new CardVerificationProgressScreen();
                 progressScreen.show(getSupportFragmentManager(), "");
-                mLuhnCardVerifier.onCardVerified(new LuhnCard(cardPan, expMonth, expYear, cvv, pin));
+//                mLuhnCardVerifier.onCardVerified(new LuhnCard(cardPan, expMonth, expYear, cvv, pin));
             }
         });
     }
@@ -344,6 +346,12 @@ public class Luhn extends BaseActivity {
 
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return super.onOptionsItemSelected(item);
     }
 
     private void registerCallBackListener() {

@@ -23,7 +23,8 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_marginBottom="16sp"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:theme="@style/ToolbarStyle"
+            app:titleTextColor="@color/white" />
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
