@@ -56,7 +56,7 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
 
     private void includeCalligraphy() {
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/ClanProForUBER-Medium.ttf")
+                .setDefaultFontPath("fonts/ClanMedium.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
     }
@@ -367,7 +367,7 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
         if (isSuccessFul) {
             finish();
         } else {
-            showInfo(errorMessage, errorMessage, null, true);
+            showInfo(errorTitle, errorMessage, null, true);
         }
     }
 }

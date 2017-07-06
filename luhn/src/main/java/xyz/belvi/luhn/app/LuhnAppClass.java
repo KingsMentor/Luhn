@@ -16,7 +16,7 @@ public class LuhnAppClass extends Application {
     public void onCreate() {
         super.onCreate();
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/ClanProForUBER-Medium.ttf")
+                .setDefaultFontPath("fonts/ClanMedium.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
         //....

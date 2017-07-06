@@ -16,7 +16,7 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/info_header"
-            fontPath="fonts/ClanProOriginal-News.otf"
+            fontPath="fonts/ClanProOriginalNews.otf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="CVV"
@@ -30,7 +30,7 @@
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/info_desc"
-                fontPath="fonts/ClanProForUBER-Book.ttf"
+                fontPath="fonts/ClanProBook.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
