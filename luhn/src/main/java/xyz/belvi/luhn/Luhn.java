@@ -2,11 +2,13 @@ package xyz.belvi.luhn;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.annotation.StyleRes;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
@@ -48,15 +50,23 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
     private int pin;
     private String cardPan;
 
+    private static final String StyleKey = "StyleKey";
 
     public static void startLuhn(Context context, LuhnCallback luhnCallback) {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class));
     }
 
-    private void includeCalligraphy() {
+    public static void startLuhn(Context context, LuhnCallback luhnCallback, @StyleRes int style) {
+        sLuhnCallback = luhnCallback;
+        context.startActivity(new Intent(context, Luhn.class)
+                .putExtra(StyleKey, style)
+        );
+    }
+
+    private void includeCalligraphy(String font) {
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/ClanMedium.ttf")
+                .setDefaultFontPath(font)
                 .setFontAttrId(R.attr.fontPath)
                 .build());
     }
@@ -64,7 +74,7 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        includeCalligraphy();
+        initStyle(getIntent().getIntExtra(StyleKey, R.style.LuhnStyle));
         setContentView(R.layout.activity_add_card);
         attachKeyboardListeners(R.id.root_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -84,6 +94,14 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
                     sLuhnCallback.cardDetailsRetrieved(new LuhnCard(cardPan, expMonth, expYear, cvv, pin), Luhn.this);
             }
         });
+
+
+    }
+
+    private void initStyle(int style) {
+        TypedArray ta = obtainStyledAttributes(style, R.styleable.luhnStyle);
+        String fontName = ta.getString(R.styleable.luhnStyle_luhn_typeface);
+        includeCalligraphy(fontName);
     }
 
     private void initBottomSheet() {

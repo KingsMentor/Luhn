@@ -21,7 +21,6 @@
     </style>
 
 
-
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -55,5 +54,9 @@
         <item name="colorAccent">@color/white</item>
     </style>
 
+    <style name="LuhnStyle">
+        <item name="luhn_title">Add Card</item>
+        <item name="luhn_typeface">fonts/ClanMedium.ttf</item>
+    </style>
 
 </resources>
