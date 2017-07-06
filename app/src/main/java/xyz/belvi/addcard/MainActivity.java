@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                cardVerifier.onCardVerified(false, getString(R.string.verification_error), getString(R.string.verification_error));
+                                cardVerifier.onCardVerified(false, getString(R.string.verification_error), getString(R.string.verification_details));
                             }
                         }, 2000);
                     }

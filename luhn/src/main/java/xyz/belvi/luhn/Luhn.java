@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 
 import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import xyz.belvi.luhn.cardValidator.models.LuhnCard;
 import xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout;
@@ -53,9 +54,17 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
         context.startActivity(new Intent(context, Luhn.class));
     }
 
+    private void includeCalligraphy() {
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/ClanProForUBER-Medium.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        includeCalligraphy();
         setContentView(R.layout.activity_add_card);
         attachKeyboardListeners(R.id.root_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -354,6 +363,7 @@ public class Luhn extends BaseActivity implements LuhnCardVerifier {
 
     @Override
     public void onCardVerified(boolean isSuccessFul, String errorTitle, String errorMessage) {
+        progressScreen.dismissAllowingStateLoss();
         if (isSuccessFul) {
             finish();
         } else {
