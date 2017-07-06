@@ -1,4 +1,4 @@
-package xyz.belvi.luhn.cardValidator;
+package xyz.belvi.luhn.cardValidator.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

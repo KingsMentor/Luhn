@@ -1,4 +1,4 @@
-package xyz.belvi.luhn.customTextInputLayout;
+package xyz.belvi.luhn.customTextInputLayout.textWatchers;
 
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -7,8 +7,9 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import xyz.belvi.luhn.R;
-import xyz.belvi.luhn.cardValidator.Card;
+import xyz.belvi.luhn.cardValidator.models.Card;
 import xyz.belvi.luhn.cardValidator.CardValidator;
+import xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout;
 
 
 /**

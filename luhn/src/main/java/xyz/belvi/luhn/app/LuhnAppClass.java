@@ -1,14 +1,15 @@
-package xyz.belvi.luhn;
+package xyz.belvi.luhn.app;
 
 import android.app.Application;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import xyz.belvi.luhn.R;
 
 /**
  * Created by zone2 on 7/4/17.
  */
 
-public class AppClass extends Application {
+public class LuhnAppClass extends Application {
 
 
     @Override
@@ -17,8 +18,7 @@ public class AppClass extends Application {
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/ClanProForUBER-Medium.ttf")
                 .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
+                .build());
         //....
     }
 }

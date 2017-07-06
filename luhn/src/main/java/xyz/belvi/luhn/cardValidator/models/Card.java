@@ -1,4 +1,4 @@
-package xyz.belvi.luhn.cardValidator;
+package xyz.belvi.luhn.cardValidator.models;
 
 import java.util.ArrayList;
 

@@ -9,7 +9,7 @@ import xyz.belvi.luhn.R;
  * Created by zone2 on 6/28/17.
  */
 
-public enum CardEnum {
+enum CardEnum {
     AmericanExpress(R.drawable.payment_ic_amex, "34, 37", "15"),
     MasterCard(R.drawable.payment_ic_master_card, "51, 52, 53, 54, 55, 222100-272099", "16"),
     VisaElectron(R.drawable.payment_ic_method, "4026, 417500, 4508, 4844, 4913, 4917", "16"),

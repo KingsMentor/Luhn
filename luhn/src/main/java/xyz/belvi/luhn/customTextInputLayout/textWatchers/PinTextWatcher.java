@@ -1,8 +1,10 @@
-package xyz.belvi.luhn.customTextInputLayout;
+package xyz.belvi.luhn.customTextInputLayout.textWatchers;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+
+import xyz.belvi.luhn.customTextInputLayout.inputLayouts.PinTextInputLayout;
 
 /**
  * Created by zone2 on 7/3/17.

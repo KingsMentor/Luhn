@@ -40,7 +40,7 @@
                 android:padding="16dp">
 
 
-                <xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout
+                <xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout
                     android:id="@+id/cti_card_number_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -64,14 +64,14 @@
                         android:textSize="16sp"
                         app:theme="@style/MyTextInputEdit" />
 
-                </xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout>
+                </xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout>
 
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout
+                    <xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout
                         android:id="@+id/ctil_expiry_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -96,9 +96,9 @@
                             android:nextFocusRight="@id/tiet_cvv_input"
                             android:textSize="16sp"
                             app:theme="@style/MyTextInputEdit" />
-                    </xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout>
+                    </xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout>
 
-                    <xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout
+                    <xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout
                         android:id="@+id/ctil_cvv_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -122,12 +122,12 @@
                             android:maxLength="3"
                             android:textSize="16sp"
                             app:theme="@style/MyTextInputEdit" />
-                    </xyz.belvi.addcard.customTextInputLayout.CardTextInputLayout>
+                    </xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout>
 
                 </android.support.v7.widget.LinearLayoutCompat>
 
 
-                <xyz.belvi.addcard.customTextInputLayout.PinTextInputLayout
+                <xyz.belvi.luhn.customTextInputLayout.inputLayouts.PinTextInputLayout
                     android:id="@+id/ctil_pin_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
                         android:maxLength="4"
                         android:textSize="16sp"
                         app:theme="@style/MyTextInputEdit" />
-                </xyz.belvi.addcard.customTextInputLayout.PinTextInputLayout>
+                </xyz.belvi.luhn.customTextInputLayout.inputLayouts.PinTextInputLayout>
 
             </android.support.v7.widget.LinearLayoutCompat>
 

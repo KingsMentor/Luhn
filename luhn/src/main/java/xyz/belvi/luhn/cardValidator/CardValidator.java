@@ -3,6 +3,8 @@ package xyz.belvi.luhn.cardValidator;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import xyz.belvi.luhn.cardValidator.models.Card;
+
 /**
  * Created by zone2 on 6/28/17.
  */

@@ -1,4 +1,4 @@
-package xyz.belvi.luhn.customTextInputLayout;
+package xyz.belvi.luhn.customTextInputLayout.transformations;
 
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -7,15 +7,15 @@ import android.view.View;
  * Created by zone2 on 6/28/17.
  */
 
-class CreditCardTransaformation extends PasswordTransformationMethod {
+public class CreditCardTransformation extends PasswordTransformationMethod {
 
-    private static CreditCardTransaformation sInstance;
+    private static CreditCardTransformation sInstance;
 
-    public static CreditCardTransaformation getInstance() {
+    public static CreditCardTransformation getInstance() {
         if (sInstance != null)
             return sInstance;
 
-        sInstance = new CreditCardTransaformation();
+        sInstance = new CreditCardTransformation();
         return sInstance;
     }
 

@@ -1,9 +1,11 @@
-package xyz.belvi.luhn.customTextInputLayout;
+package xyz.belvi.luhn.customTextInputLayout.textWatchers;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 
 import java.util.Calendar;
+
+import xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout;
 
 /**
  * Created by zone2 on 7/3/17.

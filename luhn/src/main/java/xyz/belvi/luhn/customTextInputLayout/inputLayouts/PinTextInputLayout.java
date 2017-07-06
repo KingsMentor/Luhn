@@ -1,4 +1,4 @@
-package xyz.belvi.luhn.customTextInputLayout;
+package xyz.belvi.luhn.customTextInputLayout.inputLayouts;
 
 import android.content.Context;
 import android.graphics.Rect;

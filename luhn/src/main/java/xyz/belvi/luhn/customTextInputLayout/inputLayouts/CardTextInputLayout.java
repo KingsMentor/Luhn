@@ -1,4 +1,4 @@
-package xyz.belvi.luhn.customTextInputLayout;
+package xyz.belvi.luhn.customTextInputLayout.inputLayouts;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -13,6 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import xyz.belvi.luhn.customTextInputLayout.transformations.CreditCardTransformation;
 
 public class CardTextInputLayout extends TextInputLayout {
     private boolean hasValidInput;
@@ -122,7 +123,7 @@ public class CardTextInputLayout extends TextInputLayout {
         int selection = getEditText().getSelectionEnd();
 
         if (!getEditText().getText().toString().isEmpty()) {
-            getEditText().setTransformationMethod(CreditCardTransaformation.getInstance());
+            getEditText().setTransformationMethod(CreditCardTransformation.getInstance());
             toggleEnabled("mPasswordToggledVisible", false);
             mPasswordToggleView.setChecked(false);
         } else {

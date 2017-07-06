@@ -1,9 +1,7 @@
 package xyz.belvi.luhn;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -11,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -24,21 +21,25 @@ import android.widget.LinearLayout;
 import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-import xyz.belvi.luhn.cardValidator.LuhnCard;
-import xyz.belvi.luhn.customTextInputLayout.CardNumberTextWatcher;
-import xyz.belvi.luhn.customTextInputLayout.CardTextInputLayout;
-import xyz.belvi.luhn.customTextInputLayout.CvvTextWatcher;
-import xyz.belvi.luhn.customTextInputLayout.ExpiringDateTextWatcher;
-import xyz.belvi.luhn.customTextInputLayout.PinTextInputLayout;
-import xyz.belvi.luhn.customTextInputLayout.PinTextWatcher;
+import xyz.belvi.luhn.cardValidator.models.LuhnCard;
+import xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout;
+import xyz.belvi.luhn.customTextInputLayout.inputLayouts.PinTextInputLayout;
+import xyz.belvi.luhn.customTextInputLayout.textWatchers.CardNumberTextWatcher;
+import xyz.belvi.luhn.customTextInputLayout.textWatchers.CvvTextWatcher;
+import xyz.belvi.luhn.customTextInputLayout.textWatchers.ExpiringDateTextWatcher;
+import xyz.belvi.luhn.customTextInputLayout.textWatchers.PinTextWatcher;
+import xyz.belvi.luhn.interfaces.LuhnCallback;
+import xyz.belvi.luhn.interfaces.LuhnCardVerifier;
+import xyz.belvi.luhn.screens.BaseActivity;
+import xyz.belvi.luhn.screens.CardVerificationProgressScreen;
 
-public class Luhn extends BaseActivity {
+public class Luhn extends BaseActivity implements LuhnCardVerifier {
 
     private LinearLayout llBottomSheet;
     private BottomSheetBehavior bottomSheetBehavior;
     private final int CARDIO_REQUEST_ID = 555;
     private CardVerificationProgressScreen progressScreen;
-    private static LuhnCardVerifier mLuhnCardVerifier;
+    private static LuhnCallback sLuhnCallback;
 
     private int expMonth;
     private int cvv;
@@ -46,12 +47,9 @@ public class Luhn extends BaseActivity {
     private int pin;
     private String cardPan;
 
-    public interface LuhnCardVerifier {
-        void onCardVerified(LuhnCard creditCard);
-    }
 
-    public static void startLuhn(Context context, LuhnCardVerifier cardVerifier) {
-        mLuhnCardVerifier = cardVerifier;
+    public static void startLuhn(Context context, LuhnCallback luhnCallback) {
+        sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class));
     }
 
@@ -71,10 +69,10 @@ public class Luhn extends BaseActivity {
         findViewById(R.id.btn_proceed).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerCallBackListener();
                 progressScreen = new CardVerificationProgressScreen();
                 progressScreen.show(getSupportFragmentManager(), "");
-//                mLuhnCardVerifier.onCardVerified(new LuhnCard(cardPan, expMonth, expYear, cvv, pin));
+                if (sLuhnCallback != null)
+                    sLuhnCallback.cardDetailsRetrieved(new LuhnCard(cardPan, expMonth, expYear, cvv, pin), Luhn.this);
             }
         });
     }
@@ -354,35 +352,12 @@ public class Luhn extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void registerCallBackListener() {
-        LocalBroadcastManager.getInstance(this).registerReceiver(callBackReceiver, new IntentFilter(CallbackFilter));
-    }
-
-
-    private static final String CallbackFilter = "xyz.belvi.Luhn.callBackReceiver";
-    private static final String CallbackDataStatus = "xyz.belvi.Luhn.DataStatus";
-    private static final String CallbackFilterDataErrorTitle = "xyz.belvi.Luhn.DataErrorTitle";
-    private static final String CallbackFilterDataErrorMessage = "xyz.belvi.Luhn.DataErrorMessage";
-    private BroadcastReceiver callBackReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getBooleanExtra(CallbackDataStatus, false)) {
-                finish();
-            } else {
-                String title = intent.getStringExtra(CallbackFilterDataErrorTitle);
-                String message = intent.getStringExtra(CallbackFilterDataErrorMessage);
-                showInfo(title, message, null, false);
-            }
-            LocalBroadcastManager.getInstance(context).unregisterReceiver(this);
+    @Override
+    public void onCardVerified(boolean isSuccessFul, String errorTitle, String errorMessage) {
+        if (isSuccessFul) {
+            finish();
+        } else {
+            showInfo(errorMessage, errorMessage, null, true);
         }
-    };
-
-    public static void verificationStatus(Context context, boolean isSuccessFul, String errorTitle, String errorMessage) {
-        LocalBroadcastManager.getInstance(context).sendBroadcast(
-                new Intent(CallbackFilter)
-                        .putExtra(CallbackDataStatus, isSuccessFul)
-                        .putExtra(CallbackFilterDataErrorTitle, errorTitle)
-                        .putExtra(CallbackFilterDataErrorMessage, errorMessage)
-        );
     }
 }

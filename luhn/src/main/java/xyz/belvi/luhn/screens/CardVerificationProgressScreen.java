@@ -1,4 +1,4 @@
-package xyz.belvi.luhn;
+package xyz.belvi.luhn.screens;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+
+import xyz.belvi.luhn.R;
 
 /**
  * Created by zone2 on 7/5/17.
