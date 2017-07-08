@@ -108,13 +108,11 @@ final class Luhn extends BaseActivity implements LuhnCardVerifier {
 
     @Override
     protected void onShowKeyboard(int keyboardHeight) {
-//        findViewById(R.id.btn_proceed).setVisibility(View.INVISIBLE);
         setButtonMargin(findViewById(R.id.btn_proceed), 0, 0, 0, 0);
     }
 
     @Override
     protected void onHideKeyboard() {
-//        findViewById(R.id.btn_proceed).setVisibility(View.VISIBLE);
         setButtonMargin(findViewById(R.id.btn_proceed), 16, 16, 16, 16);
     }
 
@@ -125,13 +123,7 @@ final class Luhn extends BaseActivity implements LuhnCardVerifier {
             if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
                 CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
 
-                // Never log a raw card number. Avoid displaying it, but if necessary use getFormattedCardNumber()
-                cardNumber.getEditText().setText(scanResult.getRedactedCardNumber());
-
-
-                // Do something with the raw number, e.g.:
-                // myService.setCardNumber( scanResult.cardNumber );
-
+                cardNumber.getEditText().setText(scanResult.getFormattedCardNumber());
                 if (scanResult.isExpiryValid()) {
                     expiryInputLayout.getEditText().setText(scanResult.expiryMonth + "/" + scanResult.expiryYear);
                 }
