@@ -77,6 +77,18 @@ Luhn.startLuhn(MainActivity.this, new LuhnCallback() {
                 }, R.style.LuhnStyle);
 ```
 
+##### Styling 
+
+in `styles.xml` Luhn activity can be style. IF no style is provided, then a default styling is used.
+```xml
+    <style name="LuhnStyle">
+        <item name="luhn_title">Add Card</item>
+        <item name="luhn_typeface">fonts/ClanMedium.ttf</item>
+        <item name="luhn_btn_verify_selector">@drawable/card_next_btn_selector</item>
+        <item name="luhn_show_toolbar_color">@color/colorAccent</item>
+        <item name="luhn_show_pin">true</item>
+    </style>
+```
 
 #### Credits
 
