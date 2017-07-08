@@ -43,4 +43,50 @@ Add the dependency
         <attr name="luhn_typeface" format="string" />
 ```
 
-... still updating readme ...
+### Using Luhn.
+Using Luhn can be as simple as these few lines of code.
+
+```java
+Luhn.startLuhn(MainActivity.this, new LuhnCallback() {
+                    @Override
+                    public void cardDetailsRetrieved(LuhnCard creditCard, final LuhnCardVerifier cardVerifier) {
+                        /**
+                         * Request for Otp with:
+                         *
+                         * cardVerifier.requestOTP(4);
+                         *
+                         * or 
+                         * do something with card details and return a callback to luhn using
+                         *
+                         * cardVerifier.onCardVerified(false,"error occured","error message");
+                         *
+                         *cardVerifier.onCardVerified(true, "", "");
+                         */
+                        
+
+                    }
+
+                    @Override
+                    public void otpRetrieved(int otp, final LuhnCardVerifier cardVerifier) {
+                        /**
+                         * otp is retrieved.
+                         * 
+                         * do something with otp and return callback to Luhn
+                         */
+                    }
+                }, R.style.LuhnStyle);
+```
+
+
+#### Credits
+
+* <a href="https://github.com/card-io/card.io-Android-SDK" target="_blank">Card.io Android SDK</a>
+
+
+
+#### Contributions 
+
+Contributions are welcome. Generally, contributions are managed by issues and pull requests.
+
+#License
+The MIT License (MIT). Please see the [License File](https://github.com/KingsMentor/MobileVisionBarcodeScanner/blob/master/license) for more information.
