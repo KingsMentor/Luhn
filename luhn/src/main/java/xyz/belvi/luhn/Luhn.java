@@ -41,7 +41,7 @@ import xyz.belvi.luhn.interfaces.LuhnCallback;
 import xyz.belvi.luhn.interfaces.LuhnCardVerifier;
 import xyz.belvi.luhn.screens.CardVerificationProgressScreen;
 
-final class Luhn extends BaseActivity implements LuhnCardVerifier {
+public final class Luhn extends BaseActivity implements LuhnCardVerifier {
 
     private LinearLayout llBottomSheet;
     private BottomSheetBehavior bottomSheetBehavior;
