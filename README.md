@@ -100,5 +100,6 @@ in `styles.xml` Luhn activity can be style. IF no style is provided, then a defa
 
 Contributions are welcome. Generally, contributions are managed by issues and pull requests.
 
-#Licenselicense
+#License
+
 The MIT License (MIT). Please see the [License File](https://github.com/KingsMentor/Luhn/blob/master/LICENSE) for more information.
