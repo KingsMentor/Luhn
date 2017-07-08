@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
@@ -21,6 +22,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import java.util.Arrays;
 
 import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
@@ -36,16 +39,15 @@ import xyz.belvi.luhn.customTextInputLayout.textWatchers.OTPTextWatcher;
 import xyz.belvi.luhn.customTextInputLayout.textWatchers.PinTextWatcher;
 import xyz.belvi.luhn.interfaces.LuhnCallback;
 import xyz.belvi.luhn.interfaces.LuhnCardVerifier;
-import xyz.belvi.luhn.screens.BaseActivity;
 import xyz.belvi.luhn.screens.CardVerificationProgressScreen;
 
-public final class Luhn extends BaseActivity implements LuhnCardVerifier {
+final class Luhn extends BaseActivity implements LuhnCardVerifier {
 
     private LinearLayout llBottomSheet;
     private BottomSheetBehavior bottomSheetBehavior;
-    private final int CARDIO_REQUEST_ID = 555;
+    private CardTextInputLayout cvvInputLayout, expiryInputLayout, cardNumber, otpInputLayout;
+    private PinTextInputLayout pinInputLayout;
     private CardVerificationProgressScreen progressScreen;
-    private static LuhnCallback sLuhnCallback;
 
     private int expMonth;
     private int cvv;
@@ -55,8 +57,11 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     private String cardPan, cardName;
 
     private boolean OTP_MODE;
+    private boolean retrievePin;
+    private final int CARDIO_REQUEST_ID = 555;
 
-    private static final String StyleKey = "StyleKey";
+    private static final String STYLE_KEY = "xyz.belvi.Luhn.STYLE_KEY";
+    private static LuhnCallback sLuhnCallback;
 
     public static void startLuhn(Context context, LuhnCallback luhnCallback) {
         sLuhnCallback = luhnCallback;
@@ -66,23 +71,17 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     public static void startLuhn(Context context, LuhnCallback luhnCallback, @StyleRes int style) {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class)
-                .putExtra(StyleKey, style)
+                .putExtra(STYLE_KEY, style)
         );
     }
 
-    private void includeCalligraphy(String font) {
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath(font)
-                .setFontAttrId(R.attr.fontPath)
-                .build());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_add_card);
-        initStyle(getIntent().getIntExtra(StyleKey, R.style.LuhnStyle));
+        initStyle(getIntent().getIntExtra(STYLE_KEY, R.style.LuhnStyle));
         attachKeyboardListeners(R.id.root_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -91,7 +90,94 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
 
     }
 
-    private boolean retrievePin;
+
+    @Override
+    public void onBackPressed() {
+        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+
+    @Override
+    protected void onShowKeyboard(int keyboardHeight) {
+//        findViewById(R.id.btn_proceed).setVisibility(View.INVISIBLE);
+        setButtonMargin(findViewById(R.id.btn_proceed), 0, 0, 0, 0);
+    }
+
+    @Override
+    protected void onHideKeyboard() {
+//        findViewById(R.id.btn_proceed).setVisibility(View.VISIBLE);
+        setButtonMargin(findViewById(R.id.btn_proceed), 16, 16, 16, 16);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CARDIO_REQUEST_ID) {
+            if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
+                CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
+
+                // Never log a raw card number. Avoid displaying it, but if necessary use getFormattedCardNumber()
+                cardNumber.getEditText().setText(scanResult.getRedactedCardNumber());
+
+
+                // Do something with the raw number, e.g.:
+                // myService.setCardNumber( scanResult.cardNumber );
+
+                if (scanResult.isExpiryValid()) {
+                    expiryInputLayout.getEditText().setText(scanResult.expiryMonth + "/" + scanResult.expiryYear);
+                }
+
+                if (scanResult.cvv != null) {
+                    // Never log or display a CVV
+                    cvvInputLayout.getEditText().setText(scanResult.cvv);
+                }
+
+            }
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCardVerified(boolean isSuccessFul, String errorTitle, String errorMessage) {
+        dismissProgress();
+        if (isSuccessFul) {
+            finish();
+        } else {
+            showInfo(errorTitle, errorMessage, null, true);
+        }
+    }
+
+
+    @Override
+    public void requestOTP(int otpLength) {
+        dismissProgress();
+        disableAllFields();
+        initOtp(otpLength);
+        enableNextBtn();
+        Toast.makeText(this, "Enter Otp", Toast.LENGTH_LONG).show();
+    }
+
+
+    private void includeCalligraphy(String font) {
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath(font)
+                .setFontAttrId(R.attr.fontPath)
+                .build());
+    }
 
     private void initStyle(int style) {
         TypedArray ta = obtainStyledAttributes(style, R.styleable.luhnStyle);
@@ -140,8 +226,6 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         });
     }
 
-    private CardTextInputLayout cvvInputLayout, expiryInputLayout, cardNumber, otpInputLayout;
-    private PinTextInputLayout pinInputLayout;
 
     private void initCardField() {
         cardNumber = (CardTextInputLayout) findViewById(R.id.cti_card_number_input);
@@ -281,11 +365,12 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     }
 
     private void initOtp(final int otpLength) {
+        OTP_MODE = true;
+        findViewById(R.id.ctil_otp_layout).setVisibility(View.VISIBLE);
         otpInputLayout = (CardTextInputLayout) findViewById(R.id.ctil_otp_input);
         otpInputLayout.post(new Runnable() {
             @Override
             public void run() {
-                otpInputLayout.setVisibility(View.VISIBLE);
                 otpInputLayout.requestFocus();
                 otpInputLayout.getPasswordToggleView().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -306,15 +391,6 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            return;
-        }
-        super.onBackPressed();
-    }
-
     public void onScanPress(View v) {
         Intent scanIntent = new Intent(this, CardIOActivity.class);
 
@@ -330,14 +406,10 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         startActivityForResult(scanIntent, CARDIO_REQUEST_ID);
     }
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
     private void showInfo(@StringRes int header, @StringRes int desc, @DrawableRes int drawable, boolean error) {
         showInfo(getString(header), getString(desc), ContextCompat.getDrawable(this, drawable), false);
     }
+
 
     private void showInfo(String header, String desc, @Nullable Drawable drawable, boolean error) {
         hideKeyboard();
@@ -372,17 +444,6 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
-    @Override
-    protected void onShowKeyboard(int keyboardHeight) {
-//        findViewById(R.id.btn_proceed).setVisibility(View.INVISIBLE);
-        setButtonMargin(findViewById(R.id.btn_proceed), 0, 0, 0, 0);
-    }
-
-    @Override
-    protected void onHideKeyboard() {
-//        findViewById(R.id.btn_proceed).setVisibility(View.VISIBLE);
-        setButtonMargin(findViewById(R.id.btn_proceed), 16, 16, 16, 16);
-    }
 
     private void setButtonMargin(View view, int left, int top, int right, int bottom) {
         android.support.v7.widget.LinearLayoutCompat.LayoutParams params = (android.support.v7.widget.LinearLayoutCompat.LayoutParams) view.getLayoutParams();
@@ -399,73 +460,19 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
             findViewById(R.id.btn_proceed).setEnabled(cvvInputLayout.hasValidInput() && expiryInputLayout.hasValidInput() && cardNumber.hasValidInput());
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CARDIO_REQUEST_ID) {
-            if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
-                CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
-
-                // Never log a raw card number. Avoid displaying it, but if necessary use getFormattedCardNumber()
-                cardNumber.getEditText().setText(scanResult.getRedactedCardNumber());
-
-
-                // Do something with the raw number, e.g.:
-                // myService.setCardNumber( scanResult.cardNumber );
-
-                if (scanResult.isExpiryValid()) {
-                    expiryInputLayout.getEditText().setText(scanResult.expiryMonth + "/" + scanResult.expiryYear);
-                }
-
-                if (scanResult.cvv != null) {
-                    // Never log or display a CVV
-                    cvvInputLayout.getEditText().setText(scanResult.cvv);
-                }
-
-            }
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        onBackPressed();
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onCardVerified(boolean isSuccessFul, String errorTitle, String errorMessage) {
-        dismissProgress();
-        if (isSuccessFul) {
-            finish();
-        } else {
-            showInfo(errorTitle, errorMessage, null, true);
-        }
-    }
 
     private void dismissProgress() {
         progressScreen.dismissAllowingStateLoss();
     }
 
-    @Override
-    public void requestOTP(int otpLength) {
-        dismissProgress();
-        disableAllFields();
-        findViewById(R.id.ctil_otp_layout).setVisibility(View.VISIBLE);
-        initOtp(otpLength);
-        OTP_MODE = true;
-        enableNextBtn();
-        Toast.makeText(this, "Enter Otp", Toast.LENGTH_LONG).show();
-
-    }
 
     private void disableAllFields() {
-        pinInputLayout.setEnabled(false);
-        pinInputLayout.setErrorEnabled(false);
-        cvvInputLayout.setEnabled(false);
-        cvvInputLayout.setErrorEnabled(false);
-        cardNumber.setEnabled(false);
-        cardNumber.setErrorEnabled(false);
-        expiryInputLayout.setEnabled(false);
-        expiryInputLayout.setErrorEnabled(false);
+        TextInputLayout allFields[] = {pinInputLayout, cvvInputLayout, cardNumber, expiryInputLayout};
+        for (TextInputLayout field : allFields) {
+            field.setEnabled(false);
+            field.setErrorEnabled(false);
+        }
+        Arrays.fill(allFields, null);
+
     }
 }

@@ -1,4 +1,4 @@
-package xyz.belvi.luhn.screens;
+package xyz.belvi.luhn;
 
 import android.graphics.Rect;
 import android.support.annotation.IdRes;
