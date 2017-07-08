@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.AppCompatButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btn_proceed"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_margin="16dp"
+    android:background="@drawable/card_next_btn_selector"
+    android:clickable="false"
+    android:enabled="false"
+    android:gravity="center"
+    android:padding="16dp"
+    android:text="Next"
+    android:textColor="@color/white"
+    android:textSize="16sp" />

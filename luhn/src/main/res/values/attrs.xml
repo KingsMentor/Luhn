@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <declare-styleable name="luhnStyle">
+        <attr name="luhn_show_pin" format="boolean" />
+        <attr name="luhn_title" format="string" />
+        <attr name="luhn_show_toolbar_color" format="color" />
+        <attr name="luhn_btn_verify_selector" format="reference" />
+        <attr name="luhn_typeface" format="string" />
+    </declare-styleable>
+
+
+</resources>

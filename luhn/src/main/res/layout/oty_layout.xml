@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ctil_otp_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="gone">
+
+    <xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ctil_otp_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="OTP"
+        android:textColorHint="#aaaaaa"
+        app:errorEnabled="true"
+        app:errorTextAppearance="@style/ErrorTextStyle"
+        app:passwordToggleDrawable="@drawable/payment_bank_card_info"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@null"
+        app:theme="@style/MyTextInputLayout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/tiet_pin_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:inputType="textPassword"
+            android:maxLength="4"
+            android:textSize="16sp"
+            app:theme="@style/MyTextInputEdit" />
+    </xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout>
+</android.support.v7.widget.LinearLayoutCompat>

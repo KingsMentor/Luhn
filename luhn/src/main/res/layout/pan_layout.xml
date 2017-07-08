@@ -1,0 +1,27 @@
+<xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cti_card_number_input"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Card Number"
+    android:textColorHint="#aaaaaa"
+    app:errorEnabled="true"
+    app:errorTextAppearance="@style/ErrorTextStyle"
+    app:passwordToggleDrawable="@drawable/password_selector"
+    app:passwordToggleEnabled="true"
+    app:passwordToggleTint="@null"
+    app:theme="@style/MyTextInputLayout">
+
+    <android.support.design.widget.TextInputEditText
+        fontPath="fonts/RobotoBold.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/payment_method_generic_card"
+        android:fontFamily="serif"
+        android:inputType="textPassword"
+        android:textSize="16sp"
+        app:theme="@style/MyTextInputEdit" />
+
+</xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout>
+

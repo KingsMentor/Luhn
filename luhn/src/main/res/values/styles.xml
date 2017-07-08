@@ -1,0 +1,65 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/black</item>
+        <item name="actionMenuTextColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="@style/AppTheme">
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/error_red</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="MyTextInputLayout" parent="AppTheme">
+        <item name="colorAccent">#aaaaaa</item>
+        <item name="android:textColorHint">#aaaaaa</item>
+        <!--<item name="android:textSize">20sp</item>-->
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <!--<item name="colorAccent">@color/Color Name</item>-->
+        <item name="colorControlNormal">#aaaaaa</item>
+        <item name="colorControlActivated">#aaaaaa</item>
+    </style>
+
+    <style name="MyTextInputEdit" parent="MyTextInputLayout">
+        <item name="colorControlActivated">@color/black_95</item>
+    </style>
+
+    <style name="ErrorTextStyle" parent="@android:style/TextAppearance">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/error_red</item>
+    </style>
+
+    <style name="loadingStyle" parent="AppTheme">
+
+        <item name="colorAccent">@color/white</item>
+    </style>
+
+    <style name="LuhnStyle">
+        <item name="luhn_title">Add Card</item>
+        <item name="luhn_typeface">fonts/ClanMedium.ttf</item>
+        <item name="luhn_btn_verify_selector">@drawable/card_next_btn_selector</item>
+        <item name="luhn_show_toolbar_color">@color/colorAccent</item>
+        <item name="luhn_show_pin">true</item>
+    </style>
+
+</resources>
