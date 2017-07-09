@@ -1,6 +1,7 @@
 package xyz.belvi.addcard;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -35,7 +36,13 @@ public class MainActivity extends AppCompatActivity {
                          *cardVerifier.onCardVerified(true, "", "");
                          */
 
-                        cardVerifier.requestOTP(5);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                cardVerifier.requestOTP(5);
+                            }
+                        }, 1500);
+
 
                     }
 
@@ -46,7 +53,13 @@ public class MainActivity extends AppCompatActivity {
                          *
                          * do something with otp and return callback to Luhn
                          */
-                        cardVerifier.onCardVerified(false,getString(R.string.verification_error),getString(R.string.verification_details));
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                cardVerifier.onCardVerified(false, getString(R.string.verification_error), getString(R.string.verification_details));
+
+                            }
+                        }, 1500);
                     }
                 }, R.style.LuhnStyle);
             }
