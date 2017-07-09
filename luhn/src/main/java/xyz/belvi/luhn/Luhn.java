@@ -367,7 +367,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
                 otpInputLayout.getPasswordToggleView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showInfo(R.string.pin_header, R.string.pin_details, R.drawable.payment_bank_pin, false);
+                        showInfo(R.string.otp_header, R.string.otp_details, R.drawable.payment_bank_pin, false);
 
                     }
                 });
