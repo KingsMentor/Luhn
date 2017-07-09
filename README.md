@@ -17,7 +17,7 @@ Current Verion [![](https://jitpack.io/v/KingsMentor/Luhn.svg)](https://jitpack.
 
 #### Demo
 
-See demo by downloading ![Demo Apk](https://github.com/KingsMentor/Luhn/blob/master/apk/app-debug.apk)
+See demo by downloading [Demo Apk](https://github.com/KingsMentor/Luhn/blob/master/apk/app-debug.apk)
 
 #### adding as a dependency
 
