@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                          *cardVerifier.onCardVerified(true, "", "");
                          */
 
+                        cardVerifier.requestOTP(5);
 
                     }
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                          *
                          * do something with otp and return callback to Luhn
                          */
+                        cardVerifier.onCardVerified(false,getString(R.string.verification_error),getString(R.string.verification_details));
                     }
                 }, R.style.LuhnStyle);
             }

@@ -1,6 +1,7 @@
 package xyz.belvi.luhn.customTextInputLayout.textWatchers;
 
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.View;
 
@@ -29,6 +30,13 @@ public abstract class OTPTextWatcher implements TextWatcher {
                 }
             }
         });
+        setMaxLength(length);
+    }
+
+    private void setMaxLength(int length) {
+        InputFilter[] FilterArray = new InputFilter[1];
+        FilterArray[0] = new InputFilter.LengthFilter(length);
+        mCardTextInputLayout.getEditText().setFilters(FilterArray);
     }
 
 
