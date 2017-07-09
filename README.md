@@ -15,6 +15,9 @@ Current Verion [![](https://jitpack.io/v/KingsMentor/Luhn.svg)](https://jitpack.
 ![Lib Sample](https://github.com/KingsMentor/Luhn/blob/master/screenshots/add_card_collage.jpg)
 
 
+#### Demo
+
+See demo by downloading ![Demo Apk](https://github.com/KingsMentor/Luhn/blob/master/apk/app-debug.apk)
 
 #### adding as a dependency
 
@@ -31,7 +34,7 @@ Add the JitPack repository to your build file in your root build.gradle at the e
 Add the dependency
 
 	dependencies {
-	        compile 'com.github.KingsMentor:Luhn:v1.0'
+	        compile 'com.github.KingsMentor:Luhn:v1.0.1'
 	}
 
 #### Supported Attributes
