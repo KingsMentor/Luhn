@@ -125,7 +125,9 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
 
                 cardNumber.getEditText().setText(scanResult.getFormattedCardNumber());
                 if (scanResult.isExpiryValid()) {
-                    expiryInputLayout.getEditText().setText(scanResult.expiryMonth + "/" + scanResult.expiryYear);
+                    String month = String.valueOf(scanResult.expiryMonth).length() == 1 ? "0" + scanResult.expiryMonth : String.valueOf(scanResult.expiryMonth);
+                    String year = String.valueOf(scanResult.expiryYear).substring(2);
+                    expiryInputLayout.getEditText().setText(month + "/" + year);
                 }
 
                 if (scanResult.cvv != null) {
@@ -388,11 +390,12 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
 
         // customize these values to suit your needs.
         scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true); // default: false
+        scanIntent.putExtra(CardIOActivity.EXTRA_SCAN_EXPIRY, true); // default: false
         scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true); // default: false
         scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, false); // default: false
         scanIntent.putExtra(CardIOActivity.EXTRA_USE_CARDIO_LOGO, true); // default: false
         scanIntent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true); // default: false
-        scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, true); // default: false
+        scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, false); // default: false
 
         // MY_SCAN_REQUEST_CODE is arbitrary and is only used within this activity.
         startActivityForResult(scanIntent, CARDIO_REQUEST_ID);
