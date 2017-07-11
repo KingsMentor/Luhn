@@ -44,7 +44,7 @@ Add the JitPack repository to your build file in your root build.gradle at the e
 Add the dependency
 
 	dependencies {
-	        compile 'com.github.KingsMentor:Luhn:v1.0.2'
+	        compile 'com.github.KingsMentor:Luhn:v1.0.3'
 	}
 
 #### Supported Attributes
