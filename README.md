@@ -12,6 +12,16 @@ Current Verion [![](https://jitpack.io/v/KingsMentor/Luhn.svg)](https://jitpack.
 * Styling with Attributes
 * Prevent Screen Capture on Add Card Screen
 
+### Change List
+
+#### v1.0.1 
+- OTP (One time password) verification
+- OTP Length Bug fix
+
+#### v1.0.2
+- Fix bug of installing library as a seperate module
+- gradle dependency build optimisation
+
 ![Lib Sample](https://github.com/KingsMentor/Luhn/blob/master/screenshots/add_card_collage.jpg)
 
 
@@ -34,7 +44,7 @@ Add the JitPack repository to your build file in your root build.gradle at the e
 Add the dependency
 
 	dependencies {
-	        compile 'com.github.KingsMentor:Luhn:v1.0.1'
+	        compile 'com.github.KingsMentor:Luhn:v1.0.2'
 	}
 
 #### Supported Attributes
