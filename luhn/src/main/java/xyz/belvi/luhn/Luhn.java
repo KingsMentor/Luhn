@@ -61,6 +61,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     private final int CARDIO_REQUEST_ID = 555;
 
     private static final String STYLE_KEY = "xyz.belvi.Luhn.STYLE_KEY";
+    private static final String CARD_IO = "xyz.belvi.Luhn.CARD_IO";
     private static LuhnCallback sLuhnCallback;
 
     public static void startLuhn(Context context, LuhnCallback luhnCallback) {
@@ -72,6 +73,14 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class)
                 .putExtra(STYLE_KEY, style)
+        );
+    }
+
+    public static void startLuhn(Context context, LuhnCallback luhnCallback, Bundle cardIOBundle, @StyleRes int style) {
+        sLuhnCallback = luhnCallback;
+        context.startActivity(new Intent(context, Luhn.class)
+                .putExtra(STYLE_KEY, style)
+                .putExtra(CARD_IO, cardIOBundle)
         );
     }
 
@@ -387,16 +396,20 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
 
     public void onScanPress(View v) {
         Intent scanIntent = new Intent(this, CardIOActivity.class);
+        if (getIntent().hasExtra(CARD_IO)) {
+            scanIntent.putExtras(getIntent().getBundleExtra(CARD_IO));
+        } else {
+            scanIntent = new Intent(this, CardIOActivity.class);
 
-        // customize these values to suit your needs.
-        scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true); // default: false
-        scanIntent.putExtra(CardIOActivity.EXTRA_SCAN_EXPIRY, true); // default: false
-        scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true); // default: false
-        scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, false); // default: false
-        scanIntent.putExtra(CardIOActivity.EXTRA_USE_CARDIO_LOGO, true); // default: false
-        scanIntent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true); // default: false
-        scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, false); // default: false
-
+            // customize these values to suit your needs.
+            scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true); // default: false
+            scanIntent.putExtra(CardIOActivity.EXTRA_SCAN_EXPIRY, true); // default: false
+            scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true); // default: false
+            scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, false); // default: false
+            scanIntent.putExtra(CardIOActivity.EXTRA_USE_CARDIO_LOGO, true); // default: false
+            scanIntent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true); // default: false
+            scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, false); // default: false
+        }
         // MY_SCAN_REQUEST_CODE is arbitrary and is only used within this activity.
         startActivityForResult(scanIntent, CARDIO_REQUEST_ID);
     }
