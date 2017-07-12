@@ -399,8 +399,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         if (getIntent().hasExtra(CARD_IO)) {
             scanIntent.putExtras(getIntent().getBundleExtra(CARD_IO));
         } else {
-            scanIntent = new Intent(this, CardIOActivity.class);
-
+            
             // customize these values to suit your needs.
             scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true); // default: false
             scanIntent.putExtra(CardIOActivity.EXTRA_SCAN_EXPIRY, true); // default: false
