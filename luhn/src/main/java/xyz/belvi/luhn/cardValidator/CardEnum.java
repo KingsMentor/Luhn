@@ -17,7 +17,7 @@ enum CardEnum {
     Maestro("Maestro", R.drawable.payment_ic_maestro_card, "5018, 5020, 5038, 5893, 6304, 6759, 6761, 6762, 6763", "12-19"),
     JCB("JCB", R.drawable.payment_ic_method, "3528-3589", "16-19"),
     InstaPayment("Insta Payment", R.drawable.payment_ic_method, "637, 638, 639", "16"),
-    Verve("Verve", R.drawable.payment_ic_method, "506099-506198, 650002-650027", "16,19"),
+    Verve("Verve", R.drawable.payment_ic_verve, "506099-506198, 650002-650027", "16,19"),
     Discover("Discover", R.drawable.payment_ic_discover, "6011, 622126 to 622925, 644, 645, 646, 647, 648, 649, 65", "16,19"),
     UATP("Universal Air Travel Plan", R.drawable.payment_ic_method, "1", "15"),
     MIR("Mir", R.drawable.payment_ic_method, "2200 - 2204", "16"),
