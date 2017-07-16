@@ -12,7 +12,8 @@ import xyz.belvi.luhn.R;
 enum CardEnum {
     /**
      * @VisaElectron is listed before
-     * @Visa for proper card prediction (both start with 4 bot)
+     * @Visa for proper card prediction (both start with 4 but
+     * @VisaElectron has to start with any of 4026, 417500, 4508, 4844, 4913 or 4917)
      *
      */
     AmericanExpress("America Express", R.drawable.payment_ic_amex, "34, 37", "15"),
