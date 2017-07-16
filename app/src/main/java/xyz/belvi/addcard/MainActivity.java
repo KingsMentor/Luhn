@@ -1,5 +1,6 @@
 package xyz.belvi.addcard;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -23,44 +24,30 @@ public class MainActivity extends AppCompatActivity {
 
                 Luhn.startLuhn(MainActivity.this, new LuhnCallback() {
                     @Override
-                    public void cardDetailsRetrieved(LuhnCard creditCard, final LuhnCardVerifier cardVerifier) {
-                        /**
-                         * Request for Otp with:
-                         *
-                         * cardVerifier.requestOTP(4);
-                         *
-                         * or
-                         * do something with card details and return a callback to luhn using
-                         *
-                         * cardVerifier.onCardVerified(false,"error occured","error message");
-                         *
-                         *cardVerifier.onCardVerified(true, "", "");
-                         */
-
+                    public void cardDetailsRetrieved(Context luhnContext, LuhnCard creditCard, final LuhnCardVerifier cardVerifier) {
+                        cardVerifier.startProgress();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                cardVerifier.requestOTP(5);
+                                cardVerifier.requestOTP(4);
                             }
-                        }, 1500);
-
-
+                        }, 2500);
                     }
 
                     @Override
-                    public void otpRetrieved(int otp, final LuhnCardVerifier cardVerifier) {
-                        /**
-                         * otp is retrieved.
-                         *
-                         * do something with otp and return callback to Luhn
-                         */
+                    public void otpRetrieved(Context luhnContext, final LuhnCardVerifier cardVerifier, int otp) {
+                        cardVerifier.startProgress();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                cardVerifier.onCardVerified(false, getString(R.string.verification_error), getString(R.string.verification_details));
-
+                                cardVerifier.onCardVerified(false, getString(R.string.verification_error), getString(R.string.verification_error));
                             }
-                        }, 1500);
+                        }, 2500);
+                    }
+
+                    @Override
+                    public void onFinished() {
+
                     }
                 }, R.style.LuhnStyle);
             }

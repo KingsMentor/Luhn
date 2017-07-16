@@ -69,12 +69,21 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         context.startActivity(new Intent(context, Luhn.class));
     }
 
+
     public static void startLuhn(Context context, LuhnCallback luhnCallback, @StyleRes int style) {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class)
                 .putExtra(STYLE_KEY, style)
         );
     }
+
+    public static void startLuhn(Context context, LuhnCallback luhnCallback, Bundle cardIOBundle) {
+        sLuhnCallback = luhnCallback;
+        context.startActivity(new Intent(context, Luhn.class)
+                .putExtra(CARD_IO, cardIOBundle)
+        );
+    }
+
 
     public static void startLuhn(Context context, LuhnCallback luhnCallback, Bundle cardIOBundle, @StyleRes int style) {
         sLuhnCallback = luhnCallback;
@@ -174,6 +183,19 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         Toast.makeText(this, "Enter Otp", Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void startProgress() {
+        progressScreen = new CardVerificationProgressScreen();
+        progressScreen.show(getSupportFragmentManager(), "");
+    }
+
+
+    @Override
+    public void dismissProgress() {
+        if (progressScreen != null)
+            progressScreen.dismissAllowingStateLoss();
+    }
+
 
     private void includeCalligraphy(String font) {
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
@@ -201,13 +223,11 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         findViewById(R.id.btn_proceed).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressScreen = new CardVerificationProgressScreen();
-                progressScreen.show(getSupportFragmentManager(), "");
                 if (sLuhnCallback != null)
                     if (OTP_MODE)
-                        sLuhnCallback.otpRetrieved(otp, Luhn.this);
+                        sLuhnCallback.otpRetrieved(Luhn.this, Luhn.this, otp);
                     else
-                        sLuhnCallback.cardDetailsRetrieved(new LuhnCard(cardPan, cardName, expMonth, expYear, cvv, pin), Luhn.this);
+                        sLuhnCallback.cardDetailsRetrieved(Luhn.this, new LuhnCard(cardPan, cardName, expMonth, expYear, cvv, pin), Luhn.this);
             }
         });
     }
@@ -465,11 +485,6 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
             findViewById(R.id.btn_proceed).setEnabled(cvvInputLayout.hasValidInput() && expiryInputLayout.hasValidInput() && cardNumber.hasValidInput() && pinInputLayout.hasValidInput());
         else
             findViewById(R.id.btn_proceed).setEnabled(cvvInputLayout.hasValidInput() && expiryInputLayout.hasValidInput() && cardNumber.hasValidInput());
-    }
-
-
-    private void dismissProgress() {
-        progressScreen.dismissAllowingStateLoss();
     }
 
 
