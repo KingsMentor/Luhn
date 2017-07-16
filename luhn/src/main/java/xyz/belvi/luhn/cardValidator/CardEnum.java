@@ -10,6 +10,11 @@ import xyz.belvi.luhn.R;
  */
 
 enum CardEnum {
+    /**
+     * @VisaElectron is listed before
+     * @Visa for proper card prediction (both start with 4 bot)
+     *
+     */
     AmericanExpress("America Express", R.drawable.payment_ic_amex, "34, 37", "15"),
     CardGuard("Card Guard", R.drawable.payment_ic_method, "5392", "16"),
     ChinaUnionPay("China Union Pay", R.drawable.payment_ic_unionpay, "62", "16-19"),
@@ -24,8 +29,8 @@ enum CardEnum {
     Troy("Troy", R.drawable.payment_ic_method, "979200-979289", "16"),
     UATP("Universal Air Travel Plan", R.drawable.payment_ic_method, "1", "15"),
     Verve("Verve", R.drawable.payment_ic_verve, "506099-506198, 650002-650027", "16,19"),
-    Visa("Visa", R.drawable.payment_ic_visa, "4", "13,16,19"),
-    VisaElectron("Visa Electron", R.drawable.payment_ic_method, "4026, 417500, 4508, 4844, 4913, 4917", "16");
+    VisaElectron("Visa Electron", R.drawable.payment_ic_method, "4026, 417500, 4508, 4844, 4913, 4917", "16"),
+    Visa("Visa", R.drawable.payment_ic_visa, "4", "13,16,19");
 
 
 
