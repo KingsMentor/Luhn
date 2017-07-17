@@ -65,12 +65,22 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     private static final String CARD_IO = "xyz.belvi.Luhn.CARD_IO";
     private static LuhnCallback sLuhnCallback;
 
+    /**
+     * @param context
+     * @param luhnCallback - callback for Luhn
+     */
+
     public static void startLuhn(Context context, LuhnCallback luhnCallback) {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class));
     }
 
 
+    /**
+     * @param context
+     * @param luhnCallback - callback for Luhn
+     * @param style        - styling Luhn
+     */
     public static void startLuhn(Context context, LuhnCallback luhnCallback, @StyleRes int style) {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class)
@@ -78,6 +88,11 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         );
     }
 
+    /**
+     * @param context
+     * @param luhnCallback - callback for Luhn
+     * @param cardIOBundle - cardIO settings for card scan
+     */
     public static void startLuhn(Context context, LuhnCallback luhnCallback, Bundle cardIOBundle) {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class)
@@ -86,6 +101,12 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     }
 
 
+    /**
+     * @param context
+     * @param luhnCallback - callback for Luhn
+     * @param cardIOBundle - cardIO settings for card scan
+     * @param style        - styling Luhn
+     */
     public static void startLuhn(Context context, LuhnCallback luhnCallback, Bundle cardIOBundle, @StyleRes int style) {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class)

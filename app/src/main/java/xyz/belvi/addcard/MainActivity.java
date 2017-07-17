@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFinished() {
-
+                        // luhn has finished. Do something
                     }
                 }, R.style.LuhnStyle);
             }
