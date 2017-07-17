@@ -1,5 +1,6 @@
 <resources>
     <string name="add_card">Add Card</string>
+    <string name="progress_text">Saving Card</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="cvv_header">CVV</string>
     <string name="cvv_desc">A three-digit code on your credit card, you can find this on the back of your card.</string>

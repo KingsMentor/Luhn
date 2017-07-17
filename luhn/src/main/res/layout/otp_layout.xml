@@ -28,7 +28,7 @@
             android:drawablePadding="8dp"
             android:inputType="textPassword"
             android:maxLength="4"
-            android:textSize="16sp"
+            android:textSize="@dimen/ln_input_size"
             app:theme="@style/MyTextInputEdit" />
     </xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout>
 </android.support.v7.widget.LinearLayoutCompat>

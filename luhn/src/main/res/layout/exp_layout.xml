@@ -24,7 +24,7 @@
         android:imeOptions="actionNext"
         android:inputType="textPassword"
         android:maxLength="5"
-        android:textSize="16sp"
+        android:textSize="@dimen/ln_input_size"
         app:theme="@style/MyTextInputEdit" />
 </xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout>
 

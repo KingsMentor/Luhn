@@ -1,3 +1,5 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="ln_input_size">16sp</dimen>
+    <dimen name="ln_toolbar_title_size">18sp</dimen>
+    <dimen name="ln_progress_txt_size">18sp</dimen>
 </resources>

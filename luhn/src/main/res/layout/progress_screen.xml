@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="16sp"
-        android:text="Saving Card"
+        android:padding="@dimen/ln_progress_txt_size"
+        android:text="@string/progress_text"
         android:textColor="@color/ln_colorWhite" />
 
 </LinearLayout>

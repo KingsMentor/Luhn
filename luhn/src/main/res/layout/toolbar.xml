@@ -17,5 +17,5 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:textColor="@color/ln_actionMenuTextColor"
-        android:textSize="18sp" />
+        android:textSize="@dimen/ln_toolbar_title_size" />
 </android.support.v7.widget.Toolbar>

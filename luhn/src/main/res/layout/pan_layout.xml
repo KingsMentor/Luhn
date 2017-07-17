@@ -20,7 +20,7 @@
         android:drawableStart="@drawable/payment_method_generic_card"
         android:fontFamily="serif"
         android:inputType="textPassword"
-        android:textSize="16sp"
+        android:textSize="@dimen/ln_input_size"
         app:theme="@style/MyTextInputEdit" />
 
 </xyz.belvi.luhn.customTextInputLayout.inputLayouts.CardTextInputLayout>
