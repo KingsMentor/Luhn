@@ -145,7 +145,7 @@ CardIO Scan Screen can also be customise to suit your app requirement. All you h
                 cardIoBundle.putBoolean(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true); // default: false
                 cardIoBundle.putBoolean(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, true); // default: false
 
-                Luhn.startLuhn(MainActivity.this, new LuhnCallback() {
+                Luhn.startLuhn(this, new LuhnCallback() {
                     @Override
                     public void cardDetailsRetrieved(Context luhnContext, LuhnCard creditCard, LuhnCardVerifier cardVerifier) {
                         // do something
