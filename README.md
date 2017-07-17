@@ -22,7 +22,7 @@ Current Verion [![](https://jitpack.io/v/KingsMentor/Luhn.svg)](https://jitpack.
 - Fix bug of installing library as a seperate module
 - gradle dependency build optimisation
 
-#### v2.0
+#### v2.0.0
 - Customising CardIo in Luhn
 - Interswitch Verve Card Image
 - Theming Luhn from .xml resources
