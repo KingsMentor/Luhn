@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="CVV"
-    android:textColorHint="#aaaaaa"
+    android:textColorHint="@color/colorHint"
     app:errorEnabled="true"
     app:errorTextAppearance="@style/ErrorTextStyle"
     app:passwordToggleDrawable="@drawable/payment_bank_card_info"

@@ -37,7 +37,7 @@
 
                 <include layout="@layout/pin_layout" />
 
-                <include layout="@layout/oty_layout" />
+                <include layout="@layout/otp_layout" />
             </android.support.v7.widget.LinearLayoutCompat>
 
         </android.support.v4.widget.NestedScrollView>

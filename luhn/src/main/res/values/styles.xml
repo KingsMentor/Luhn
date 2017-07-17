@@ -26,7 +26,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/error_red</item>
+        <item name="android:textColor">@color/colorErrorRed</item>
         <item name="android:textSize">14sp</item>
     </style>
 
@@ -46,12 +46,12 @@
 
     <style name="ErrorTextStyle" parent="@android:style/TextAppearance">
         <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/error_red</item>
+        <item name="android:textColor">@color/colorErrorRed</item>
     </style>
 
     <style name="loadingStyle" parent="AppTheme">
 
-        <item name="colorAccent">@color/white</item>
+        <item name="colorAccent">@color/colorProgress</item>
     </style>
 
     <style name="LuhnStyle">

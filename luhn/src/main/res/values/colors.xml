@@ -4,7 +4,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff000000</color>
-    <color name="error_red">#ffdd0031</color>
+    <color name="colorHint">#aaaaaa</color>
+    <color name="colorErrorRed">#ffdd0031</color>
+    <color name="colorProgress">#ffffff</color>
+    <color name="colorInfoHeader">#ff151525</color>
+    <color name="colorInfoDesc">#ff6b6b76</color>
     <color name="white">#ffffff</color>
     <color name="black">#ff000000</color>
     <color name="black_95">#ff151525</color>

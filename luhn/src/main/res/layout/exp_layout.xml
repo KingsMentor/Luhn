@@ -8,6 +8,7 @@
     android:layout_marginRight="8dp"
     android:layout_weight="1"
     android:hint="MM/YY"
+    android:textColorHint="@color/colorHint"
     app:errorEnabled="true"
     app:errorTextAppearance="@style/ErrorTextStyle"
     app:passwordToggleDrawable="@drawable/payment_bank_card_info"

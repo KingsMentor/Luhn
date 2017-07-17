@@ -19,8 +19,7 @@
             fontPath="fonts/ClanProOriginalNews.otf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CVV"
-            android:textColor="#ff151525"
+            android:textColor="@color/colorInfoHeader"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -36,7 +35,7 @@
                 android:layout_weight="1"
                 android:paddingRight="16dp"
                 android:paddingTop="16dp"
-                android:textColor="#ff6b6b76"
+                android:textColor="@color/colorInfoDesc"
                 android:textSize="14sp" />
 
             <android.support.v7.widget.AppCompatImageView
@@ -55,7 +54,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/black"
+            android:background="@color/colorAccent"
+            android:gravity="center"
             android:padding="16dp"
             android:text="Ok"
             android:textColor="@color/white"
