@@ -16,6 +16,6 @@
         android:gravity="center"
         android:padding="16sp"
         android:text="Saving Card"
-        android:textColor="@color/white" />
+        android:textColor="@color/ln_colorWhite" />
 
 </LinearLayout>

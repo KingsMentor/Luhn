@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:hint="OTP"
-        android:textColorHint="@color/colorHint"
+        android:textColorHint="@color/ln_colorHint"
         app:errorEnabled="true"
         app:errorTextAppearance="@style/ErrorTextStyle"
         app:passwordToggleDrawable="@drawable/payment_bank_card_info"

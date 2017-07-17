@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="Card Number"
-    android:textColorHint="@color/colorHint"
+    android:textColorHint="@color/ln_colorHint"
     app:errorEnabled="true"
     app:errorTextAppearance="@style/ErrorTextStyle"
     app:passwordToggleDrawable="@drawable/password_selector"

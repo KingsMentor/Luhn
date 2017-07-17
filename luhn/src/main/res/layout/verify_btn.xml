@@ -13,5 +13,5 @@
     android:gravity="center"
     android:padding="16dp"
     android:text="Next"
-    android:textColor="@color/white"
+    android:textColor="@color/ln_colorWhite"
     android:textSize="16sp" />

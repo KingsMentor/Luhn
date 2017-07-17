@@ -6,8 +6,8 @@
         <item name="colorPrimary">@color/colorAccent</item>
         <item name="colorPrimaryDark">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlHighlight">@color/black</item>
-        <item name="actionMenuTextColor">@color/white</item>
+        <item name="colorControlHighlight">@color/ln_colorControlHighlight</item>
+        <item name="actionMenuTextColor">@color/ln_actionMenuTextColor</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,8 +16,8 @@
     </style>
 
     <style name="ToolbarStyle" parent="@style/AppTheme">
-        <item name="colorControlHighlight">@color/white</item>
-        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlHighlight">@color/ln_colorWhite</item>
+        <item name="colorControlNormal">@color/ln_colorWhite</item>
     </style>
 
 
@@ -26,32 +26,29 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/colorErrorRed</item>
+        <item name="android:textColor">@color/ln_colorError</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="MyTextInputLayout" parent="AppTheme">
-        <item name="colorAccent">#aaaaaa</item>
-        <item name="android:textColorHint">#aaaaaa</item>
-        <!--<item name="android:textSize">20sp</item>-->
-        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
-        <!--<item name="colorAccent">@color/Color Name</item>-->
-        <item name="colorControlNormal">#aaaaaa</item>
-        <item name="colorControlActivated">#aaaaaa</item>
+        <item name="colorAccent">@color/ln_colorHint</item>
+        <item name="android:textColorHint">@color/ln_colorHint</item>
+        <item name="colorControlNormal">@color/ln_colorHint</item>
+        <item name="colorControlActivated">@color/ln_colorHint</item>
     </style>
 
     <style name="MyTextInputEdit" parent="MyTextInputLayout">
-        <item name="colorControlActivated">@color/black_95</item>
+        <item name="colorControlActivated">@color/ln_colorControlActivated</item>
     </style>
 
     <style name="ErrorTextStyle" parent="@android:style/TextAppearance">
         <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/colorErrorRed</item>
+        <item name="android:textColor">@color/ln_colorError</item>
     </style>
 
     <style name="loadingStyle" parent="AppTheme">
 
-        <item name="colorAccent">@color/colorProgress</item>
+        <item name="colorAccent">@color/ln_colorProgress</item>
     </style>
 
     <style name="LuhnStyle">
