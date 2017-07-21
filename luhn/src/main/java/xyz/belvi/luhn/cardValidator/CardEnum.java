@@ -16,7 +16,7 @@ enum CardEnum {
      * @VisaElectron has to start with any of 4026, 417500, 4508, 4844, 4913 or 4917)
      *
      */
-    AmericanExpress("America Express", R.drawable.payment_ic_amex, "34, 37", "15"),
+    AmericanExpress("American Express", R.drawable.payment_ic_amex, "34, 37", "15"),
     CardGuard("Card Guard", R.drawable.payment_ic_method, "5392", "16"),
     ChinaUnionPay("China Union Pay", R.drawable.payment_ic_unionpay, "62", "16-19"),
     Dankort("Dankort", R.drawable.payment_ic_method, "5019", "16"),
