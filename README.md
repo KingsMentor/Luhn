@@ -33,7 +33,7 @@ Current Verion [![](https://jitpack.io/v/KingsMentor/Luhn.svg)](https://jitpack.
 - Pin and OTP Mismatch bug fixed
 - Expiry date string included
 - Proper datatype for pin, cvv and otp
-- Proper naming for `American Card`
+- Proper naming for `American Express`
 
 ![Lib Sample](https://github.com/KingsMentor/Luhn/blob/master/screenshots/add_card_collage.jpg)
 
@@ -78,7 +78,7 @@ Add the dependency
      * @VisaElectron has to start with any of 4026, 417500, 4508, 4844, 4913 or 4917)
      *
      */
-    AmericanExpress("America Express", R.drawable.payment_ic_amex, "34, 37", "15"),
+    AmericanExpress("American Express", R.drawable.payment_ic_amex, "34, 37", "15"),
     CardGuard("Card Guard", R.drawable.payment_ic_method, "5392", "16"),
     ChinaUnionPay("China Union Pay", R.drawable.payment_ic_unionpay, "62", "16-19"),
     Dankort("Dankort", R.drawable.payment_ic_method, "5019", "16"),
