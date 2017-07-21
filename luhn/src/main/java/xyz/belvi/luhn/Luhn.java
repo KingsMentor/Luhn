@@ -51,11 +51,8 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     private CardVerificationProgressScreen progressScreen;
 
     private int expMonth;
-    private int cvv;
     private int expYear;
-    private int pin;
-    private int otp;
-    private String cardPan, cardName;
+    private String cardPan, cardName, expDate, pin, otp, cvv;
 
     private boolean OTP_MODE;
     private boolean retrievePin;
@@ -251,7 +248,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
                     if (OTP_MODE)
                         sLuhnCallback.otpRetrieved(Luhn.this, Luhn.this, otp);
                     else
-                        sLuhnCallback.cardDetailsRetrieved(Luhn.this, new LuhnCard(cardPan, cardName, expMonth, expYear, cvv, pin), Luhn.this);
+                        sLuhnCallback.cardDetailsRetrieved(Luhn.this, new LuhnCard(cardPan, cardName, expDate, cvv, pin, expMonth, expYear), Luhn.this);
             }
         });
     }
@@ -342,7 +339,8 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
                 });
                 expiryInputLayout.getEditText().addTextChangedListener(new ExpiringDateTextWatcher(expiryInputLayout) {
                     @Override
-                    protected void onValidated(boolean moveToNext, int expMonthValue, int expYearValue) {
+                    protected void onValidated(boolean moveToNext, String expDateValue, int expMonthValue, int expYearValue) {
+                        expDate = expDateValue;
                         expMonth = expMonthValue;
                         expYear = expYearValue;
                         if (moveToNext) {
@@ -374,7 +372,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
                 });
                 cvvInputLayout.getEditText().addTextChangedListener(new CvvTextWatcher(cvvInputLayout) {
                     @Override
-                    public void onValidated(boolean moveToNext, int cvvValue) {
+                    public void onValidated(boolean moveToNext, String cvvValue) {
                         cvv = cvvValue;
                         if (moveToNext && retrievePin)
                             findViewById(R.id.tiet_pin_input).requestFocus();
@@ -401,8 +399,8 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
                 });
                 pinInputLayout.getEditText().addTextChangedListener(new PinTextWatcher(pinInputLayout) {
                     @Override
-                    public void onValidated(boolean moveToNext, int otpValue) {
-                        otp = otpValue;
+                    public void onValidated(boolean moveToNext, String pinValue) {
+                        pin = pinValue;
                         enableNextBtn();
                     }
                 });
@@ -428,8 +426,8 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
                 });
                 otpInputLayout.getEditText().addTextChangedListener(new OTPTextWatcher(otpInputLayout, otpLength) {
                     @Override
-                    public void onValidated(boolean moveToNext, int pinValue) {
-                        pin = pinValue;
+                    public void onValidated(boolean moveToNext, String otpValue) {
+                        otp = otpValue;
                         enableNextBtn();
                     }
                 });

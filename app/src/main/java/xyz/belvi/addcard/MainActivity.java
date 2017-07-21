@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.add_card).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Luhn.startLuhn(MainActivity.this, new LuhnCallback() {
                     @Override
                     public void cardDetailsRetrieved(Context luhnContext, LuhnCard creditCard, final LuhnCardVerifier cardVerifier) {

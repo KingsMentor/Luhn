@@ -51,7 +51,7 @@ public abstract class PinTextWatcher implements TextWatcher {
         }
         mCardTextInputLayout.setHasValidInput(moveToNext);
         String text = mCardTextInputLayout.getEditText().getText().toString();
-        onValidated(moveToNext, Integer.parseInt(text.isEmpty() ? "0" : text));
+        onValidated(moveToNext, text);
 
     }
 
@@ -64,5 +64,5 @@ public abstract class PinTextWatcher implements TextWatcher {
         return source.toString().length() == 4;
     }
 
-    protected abstract void onValidated(boolean moveToNext, int pin);
+    protected abstract void onValidated(boolean moveToNext, String pin);
 }

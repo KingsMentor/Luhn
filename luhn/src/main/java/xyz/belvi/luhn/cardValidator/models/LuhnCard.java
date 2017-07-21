@@ -8,17 +8,18 @@ import android.os.Parcelable;
  */
 
 public final class LuhnCard implements Parcelable {
-    String pan,cardName;
-    int expMonth, expYear, cvv, pin;
+    private String pan, cardName, expDate, cvv, pin;
+    private int expMonth, expYear;
 
 
-    public LuhnCard(String pan,String cardName, int expMonth, int expYear, int cvv, int pin) {
+    public LuhnCard(String pan, String cardName, String expDate, String cvv, String pin, int expMonth, int expYear) {
         this.pan = pan;
         this.cardName = cardName;
         this.expMonth = expMonth;
         this.expYear = expYear;
         this.cvv = cvv;
         this.pin = pin;
+        this.expDate = expDate;
     }
 
     protected LuhnCard(Parcel in) {
@@ -26,8 +27,9 @@ public final class LuhnCard implements Parcelable {
         cardName = in.readString();
         expMonth = in.readInt();
         expYear = in.readInt();
-        cvv = in.readInt();
-        pin = in.readInt();
+        cvv = in.readString();
+        pin = in.readString();
+        expDate = in.readString();
     }
 
     public static final Creator<LuhnCard> CREATOR = new Creator<LuhnCard>() {
@@ -53,8 +55,9 @@ public final class LuhnCard implements Parcelable {
         dest.writeString(cardName);
         dest.writeInt(expMonth);
         dest.writeInt(expYear);
-        dest.writeInt(cvv);
-        dest.writeInt(pin);
+        dest.writeString(cvv);
+        dest.writeString(pin);
+        dest.writeString(expDate);
     }
 
     public String getPan() {
@@ -69,12 +72,16 @@ public final class LuhnCard implements Parcelable {
         return this.expYear;
     }
 
-    public int getCvv() {
-        return this.cvv;
+    public String getExpDate() {
+        return expDate;
     }
 
-    public int getPin() {
-        return this.pin;
+    public String getCvv() {
+        return cvv;
+    }
+
+    public String getPin() {
+        return pin;
     }
 
     public String getCardName() {

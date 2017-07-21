@@ -4,6 +4,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff000000</color>
+
     <color name="ln_colorControlHighlight">#ff000000</color>
     <color name="ln_colorControlActivated">#ff151525</color>
     <color name="ln_colorHint">#aaaaaa</color>

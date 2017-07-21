@@ -11,7 +11,7 @@ import xyz.belvi.luhn.cardValidator.models.LuhnCard;
 public interface LuhnCallback {
     void cardDetailsRetrieved(Context luhnContext, LuhnCard creditCard, LuhnCardVerifier cardVerifier);
 
-    void otpRetrieved(Context luhnContext, LuhnCardVerifier cardVerifier, int otp);
+    void otpRetrieved(Context luhnContext, LuhnCardVerifier cardVerifier, String otp);
 
     void onFinished();
 }
