@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void otpRetrieved(Context luhnContext, final LuhnCardVerifier cardVerifier, int otp) {
+                    public void otpRetrieved(Context luhnContext, final LuhnCardVerifier cardVerifier, String otp) {
                         cardVerifier.startProgress();
                         new Handler().postDelayed(new Runnable() {
                             @Override
