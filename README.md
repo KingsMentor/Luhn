@@ -29,6 +29,12 @@ Current Verion [![](https://jitpack.io/v/KingsMentor/Luhn.svg)](https://jitpack.
 - custom dialog integration (you can now use your app loading screen instead of Luhn's progress screen. Just don't call `cardVerifier.startProgress();`. Call your progress implementation instead)
 - onFinished Callback. Get call back when luhn has finished, so you can `doSomething();`.
 
+#### v2.0.1
+- Pin and OTP Mismatch bug fixed
+- Expiry date string included
+- Proper datatype for pin, cvv and otp
+- Proper naming for `American Card`
+
 ![Lib Sample](https://github.com/KingsMentor/Luhn/blob/master/screenshots/add_card_collage.jpg)
 
 
