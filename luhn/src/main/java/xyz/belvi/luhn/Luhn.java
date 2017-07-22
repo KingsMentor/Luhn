@@ -135,6 +135,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
             return;
         }
         super.onBackPressed();
+        sLuhnCallback.onFinished(false);
     }
 
     @Override
@@ -186,7 +187,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     public void onCardVerified(boolean isSuccessFul, String errorTitle, String errorMessage) {
         dismissProgress();
         if (isSuccessFul) {
-            finish();
+            sLuhnCallback.onFinished(isSuccessFul);
         } else {
             showInfo(errorTitle, errorMessage, null, true);
         }

@@ -13,5 +13,5 @@ public interface LuhnCallback {
 
     void otpRetrieved(Context luhnContext, LuhnCardVerifier cardVerifier, String otp);
 
-    void onFinished();
+    void onFinished(boolean isVerified);
 }
