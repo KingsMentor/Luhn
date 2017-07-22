@@ -167,12 +167,12 @@ CardIO Scan Screen can also be customise to suit your app requirement. All you h
                     }
 
                     @Override
-                    public void otpRetrieved(Context luhnContext, LuhnCardVerifier cardVerifier, int otp) {
+                    public void otpRetrieved(Context luhnContext, LuhnCardVerifier cardVerifier, String otp) {
                         // do something
                     }
 
                     @Override
-                    public void onFinished() {
+                    public void onFinished(boolean isVerified) {
                         // do something
                     }
                 }, cardIoBundle);
