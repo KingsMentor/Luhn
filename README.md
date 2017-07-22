@@ -60,6 +60,15 @@ Add the dependency
 	        compile 'com.github.KingsMentor:Luhn:v1.0.3'
 	}
 
+You can also use  `master-SNAPSHOT` instead. This always contains stable builds (with new fixes) prior to a new release. 
+To use, do this instead
+
+```xml
+	dependencies {
+	        compile 'com.github.KingsMentor:Luhn:master-SNAPSHOT'
+	}
+```
+
 #### Supported Attributes
 ```
         <attr name="luhn_show_pin" format="boolean" />
@@ -121,7 +130,7 @@ Luhn.startLuhn(this, new LuhnCallback() {
                     }
 
                     @Override
-                    public void otpRetrieved(Context luhnContext, final LuhnCardVerifier cardVerifier, int otp) {
+                    public void otpRetrieved(Context luhnContext, final LuhnCardVerifier cardVerifier, String otp) {
                         cardVerifier.startProgress();
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -132,7 +141,7 @@ Luhn.startLuhn(this, new LuhnCallback() {
                     }
 
                     @Override
-                    public void onFinished() {
+                    public void onFinished(boolean isVerified) {
                         // luhn has finished. Do something
                     }
                 }, R.style.LuhnStyle);
