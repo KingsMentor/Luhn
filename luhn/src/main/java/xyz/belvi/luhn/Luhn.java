@@ -16,6 +16,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -202,9 +203,11 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     private void initStyle(int style) {
         TypedArray ta = obtainStyledAttributes(style, R.styleable.luhnStyle);
         String fontName = ta.getString(R.styleable.luhnStyle_luhn_typeface);
+        String title = ta.getString(R.styleable.luhnStyle_luhn_title);
         includeCalligraphy(fontName);
         initViews();
         retrievePin = ta.getBoolean(R.styleable.luhnStyle_luhn_show_pin, false);
+        ((AppCompatTextView) findViewById(R.id.toolbar_title)).setText(TextUtils.isEmpty(title) ? "Add Card" : title);
         findViewById(R.id.btn_proceed).setBackground(ta.getDrawable(R.styleable.luhnStyle_luhn_btn_verify_selector));
         findViewById(R.id.toolbar).setBackgroundColor(ta.getColor(R.styleable.luhnStyle_luhn_show_toolbar_color, ContextCompat.getColor(this, R.color.colorPrimary)));
     }
