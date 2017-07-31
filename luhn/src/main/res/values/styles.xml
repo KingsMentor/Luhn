@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorAccent</item>
-        <item name="colorPrimaryDark">@color/colorAccent</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/ln_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/ln_colorPrimaryDark</item>
+        <item name="colorAccent">@color/ln_colorAccent</item>
         <item name="colorControlHighlight">@color/ln_colorControlHighlight</item>
         <item name="actionMenuTextColor">@color/ln_actionMenuTextColor</item>
     </style>
@@ -55,7 +55,7 @@
         <item name="luhn_title">Add Card</item>
         <item name="luhn_typeface">fonts/ClanMedium.ttf</item>
         <item name="luhn_btn_verify_selector">@drawable/card_next_btn_selector</item>
-        <item name="luhn_show_toolbar_color">@color/colorAccent</item>
+        <item name="luhn_show_toolbar_color">@color/ln_colorAccent</item>
         <item name="luhn_show_pin">true</item>
     </style>
 

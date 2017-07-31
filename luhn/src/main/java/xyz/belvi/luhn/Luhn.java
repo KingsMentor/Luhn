@@ -209,7 +209,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         retrievePin = ta.getBoolean(R.styleable.luhnStyle_luhn_show_pin, false);
         ((AppCompatTextView) findViewById(R.id.toolbar_title)).setText(TextUtils.isEmpty(title) ? "Add Card" : title);
         findViewById(R.id.btn_proceed).setBackground(ta.getDrawable(R.styleable.luhnStyle_luhn_btn_verify_selector));
-        findViewById(R.id.toolbar).setBackgroundColor(ta.getColor(R.styleable.luhnStyle_luhn_show_toolbar_color, ContextCompat.getColor(this, R.color.colorPrimary)));
+        findViewById(R.id.toolbar).setBackgroundColor(ta.getColor(R.styleable.luhnStyle_luhn_show_toolbar_color, ContextCompat.getColor(this, R.color.ln_colorPrimary)));
     }
 
     private void initViews() {
