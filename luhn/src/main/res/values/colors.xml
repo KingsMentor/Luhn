@@ -6,6 +6,7 @@
     <color name="colorAccent">#ff000000</color>
 
     <color name="ln_colorControlHighlight">#ff000000</color>
+    <color name="ln_info_bg">#ff000000</color>
     <color name="ln_colorControlActivated">#ff151525</color>
     <color name="ln_colorHint">#aaaaaa</color>
     <color name="ln_colorError">#ffdd0031</color>
@@ -14,8 +15,8 @@
     <color name="ln_colorInfoDesc">#ff6b6b76</color>
     <color name="ln_colorWhite">#ffffff</color>
     <color name="ln_actionMenuTextColor">#ffffff</color>
-    <color name="ln_colorBlack_enabled">#ff000000</color>
-    <color name="ln_colorBlack__pressed_80">#ff3a3a48</color>
-    <color name="ln_colorGrey_disabled">#ffa4a4ac</color>
+    <color name="ln_verify_btn_enabled">#ff000000</color>
+    <color name="ln_verify_btn_pressed">#ff3a3a48</color>
+    <color name="ln_verify_btn_disabled">#ffa4a4ac</color>
 
 </resources>

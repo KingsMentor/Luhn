@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/colorAccent"
+            android:background="@color/ln_info_bg"
             android:gravity="center"
             android:padding="16dp"
             android:text="Ok"
