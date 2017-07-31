@@ -57,7 +57,7 @@ Add the JitPack repository to your build file in your root build.gradle at the e
 Add the dependency
 
 	dependencies {
-	        compile 'com.github.KingsMentor:Luhn:v2.0.1'
+	        compile 'com.github.KingsMentor:Luhn:v2.0.2'
 	}
 
 You can also use  `master-SNAPSHOT` instead. This always contains stable builds (with new fixes) prior to a new release. 
