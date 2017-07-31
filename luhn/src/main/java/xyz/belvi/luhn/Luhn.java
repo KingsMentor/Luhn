@@ -72,6 +72,13 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         );
     }
 
+    public static void startLuhn(Context context, LuhnCallback luhnCallback, Bundle cardIOBundle) {
+        sLuhnCallback = luhnCallback;
+        context.startActivity(new Intent(context, Luhn.class)
+                .putExtra(CARD_IO, cardIOBundle)
+        );
+    }
+
     public static void startLuhn(Context context, LuhnCallback luhnCallback, Bundle cardIOBundle, @StyleRes int style) {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class)
@@ -387,6 +394,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
             @Override
             public void run() {
                 otpInputLayout.requestFocus();
+                showKeyboard();
                 otpInputLayout.getPasswordToggleView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -456,6 +464,14 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    private void showKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(view, 0);
         }
     }
 
