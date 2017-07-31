@@ -16,7 +16,6 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -50,9 +49,8 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     private PinTextInputLayout pinInputLayout;
     private CardVerificationProgressScreen progressScreen;
 
-    private int expMonth;
-    private int expYear;
-    private String cardPan, cardName, expDate, pin, otp, cvv;
+    private int expMonth, expYear;
+    private String cardPan, cardName, cvv, expDate, pin, otp;
 
     private boolean OTP_MODE;
     private boolean retrievePin;
@@ -62,22 +60,11 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     private static final String CARD_IO = "xyz.belvi.Luhn.CARD_IO";
     private static LuhnCallback sLuhnCallback;
 
-    /**
-     * @param context
-     * @param luhnCallback - callback for Luhn
-     */
-
     public static void startLuhn(Context context, LuhnCallback luhnCallback) {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class));
     }
 
-
-    /**
-     * @param context
-     * @param luhnCallback - callback for Luhn
-     * @param style        - styling Luhn
-     */
     public static void startLuhn(Context context, LuhnCallback luhnCallback, @StyleRes int style) {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class)
@@ -85,25 +72,6 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         );
     }
 
-    /**
-     * @param context
-     * @param luhnCallback - callback for Luhn
-     * @param cardIOBundle - cardIO settings for card scan
-     */
-    public static void startLuhn(Context context, LuhnCallback luhnCallback, Bundle cardIOBundle) {
-        sLuhnCallback = luhnCallback;
-        context.startActivity(new Intent(context, Luhn.class)
-                .putExtra(CARD_IO, cardIOBundle)
-        );
-    }
-
-
-    /**
-     * @param context
-     * @param luhnCallback - callback for Luhn
-     * @param cardIOBundle - cardIO settings for card scan
-     * @param style        - styling Luhn
-     */
     public static void startLuhn(Context context, LuhnCallback luhnCallback, Bundle cardIOBundle, @StyleRes int style) {
         sLuhnCallback = luhnCallback;
         context.startActivity(new Intent(context, Luhn.class)
@@ -187,7 +155,9 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     public void onCardVerified(boolean isSuccessFul, String errorTitle, String errorMessage) {
         dismissProgress();
         if (isSuccessFul) {
-            sLuhnCallback.onFinished(isSuccessFul);
+            finish();
+            if (sLuhnCallback != null)
+                sLuhnCallback.onFinished(isSuccessFul);
         } else {
             showInfo(errorTitle, errorMessage, null, true);
         }
@@ -209,11 +179,9 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         progressScreen.show(getSupportFragmentManager(), "");
     }
 
-
     @Override
     public void dismissProgress() {
-        if (progressScreen != null)
-            progressScreen.dismissAllowingStateLoss();
+        progressScreen.dismissAllowingStateLoss();
     }
 
 
@@ -227,11 +195,9 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     private void initStyle(int style) {
         TypedArray ta = obtainStyledAttributes(style, R.styleable.luhnStyle);
         String fontName = ta.getString(R.styleable.luhnStyle_luhn_typeface);
-        String title = ta.getString(R.styleable.luhnStyle_luhn_title);
         includeCalligraphy(fontName);
         initViews();
         retrievePin = ta.getBoolean(R.styleable.luhnStyle_luhn_show_pin, false);
-        ((AppCompatTextView) findViewById(R.id.toolbar_title)).setText(TextUtils.isEmpty(title) ? "Add Card" : title);
         findViewById(R.id.btn_proceed).setBackground(ta.getDrawable(R.styleable.luhnStyle_luhn_btn_verify_selector));
         findViewById(R.id.toolbar).setBackgroundColor(ta.getColor(R.styleable.luhnStyle_luhn_show_toolbar_color, ContextCompat.getColor(this, R.color.colorPrimary)));
     }
@@ -245,11 +211,14 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
         findViewById(R.id.btn_proceed).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideKeyboard();
                 if (sLuhnCallback != null)
                     if (OTP_MODE)
                         sLuhnCallback.otpRetrieved(Luhn.this, Luhn.this, otp);
-                    else
+                    else {
+                        cardPan = cardPan.replace(" ", "");
                         sLuhnCallback.cardDetailsRetrieved(Luhn.this, new LuhnCard(cardPan, cardName, expDate, cvv, pin, expMonth, expYear), Luhn.this);
+                    }
             }
         });
     }
@@ -448,6 +417,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
             scanIntent.putExtra(CardIOActivity.EXTRA_SCAN_EXPIRY, true); // default: false
             scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true); // default: false
             scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, false); // default: false
+            scanIntent.putExtra(CardIOActivity.EXTRA_USE_CARDIO_LOGO, true); // default: false
             scanIntent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, true); // default: false
             scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, true); // default: false
         }

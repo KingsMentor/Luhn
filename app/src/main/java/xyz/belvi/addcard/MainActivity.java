@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFinished() {
+                    public void onFinished(boolean isVerfied) {
                         // luhn has finished. Do something
                     }
                 }, R.style.LuhnStyle);
