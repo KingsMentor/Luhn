@@ -57,7 +57,7 @@ Add the JitPack repository to your build file in your root build.gradle at the e
 Add the dependency
 
 	dependencies {
-	        compile 'com.github.KingsMentor:Luhn:v2.0.2'
+	        compile 'com.github.KingsMentor:Luhn:v2.1.1'
 	}
 
 You can also use  `master-SNAPSHOT` instead. This always contains stable builds (with new fixes) prior to a new release. 
@@ -214,7 +214,13 @@ colors, strings, dimens of views and components in Luhn is controlled from resou
 ##### in colors.xml
 
  ```   
+
+    <color name="ln_colorPrimary">#ff000000</color>
+    <color name="ln_colorPrimaryDark">#303F9F</color>
+    <color name="ln_colorAccent">#ff000000</color>
+
     <color name="ln_colorControlHighlight">#ff000000</color>
+    <color name="ln_info_bg">#ff000000</color>
     <color name="ln_colorControlActivated">#ff151525</color>
     <color name="ln_colorHint">#aaaaaa</color>
     <color name="ln_colorError">#ffdd0031</color>
@@ -223,9 +229,10 @@ colors, strings, dimens of views and components in Luhn is controlled from resou
     <color name="ln_colorInfoDesc">#ff6b6b76</color>
     <color name="ln_colorWhite">#ffffff</color>
     <color name="ln_actionMenuTextColor">#ffffff</color>
-    <color name="ln_colorBlack_enabled">#ff000000</color>
-    <color name="ln_colorBlack__pressed_80">#ff3a3a48</color>
-    <color name="ln_colorGrey_disabled">#ffa4a4ac</color>
+    <color name="ln_verify_btn_enabled">#ff000000</color>
+    <color name="ln_verify_btn_pressed">#ff3a3a48</color>
+    <color name="ln_verify_btn_disabled">#ffa4a4ac</color>
+
     
 ```
 ##### in dimens.xml
