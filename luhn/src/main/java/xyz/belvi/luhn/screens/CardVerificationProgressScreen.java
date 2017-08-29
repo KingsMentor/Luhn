@@ -28,6 +28,6 @@ public class CardVerificationProgressScreen extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         setCancelable(false);
-        return inflater.inflate(R.layout.progress_screen, container, false);
+        return inflater.inflate(R.layout.lh_progress_screen, container, false);
     }
 }

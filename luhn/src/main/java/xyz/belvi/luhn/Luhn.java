@@ -93,7 +93,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-        setContentView(R.layout.activity_add_card);
+        setContentView(R.layout.lh_activity_add_card);
         initStyle(getIntent().getIntExtra(STYLE_KEY, R.style.LuhnStyle));
         attachKeyboardListeners(R.id.root_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

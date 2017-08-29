@@ -8,14 +8,14 @@
 
 
     <include
-        layout="@layout/exp_layout"
+        layout="@layout/lh_exp_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="8dp"
         android:layout_weight="1" />
 
     <include
-        layout="@layout/cvv_layout"
+        layout="@layout/lh_cvv_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
