@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="LuhnAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/ln_colorPrimary</item>
         <item name="colorPrimaryDark">@color/ln_colorPrimaryDark</item>
@@ -10,12 +10,12 @@
         <item name="actionMenuTextColor">@color/ln_actionMenuTextColor</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="LuhnAppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="ToolbarStyle" parent="@style/AppTheme">
+    <style name="ToolbarStyle" parent="@style/LuhnAppTheme">
         <item name="colorControlHighlight">@color/ln_colorWhite</item>
         <item name="colorControlNormal">@color/ln_colorWhite</item>
     </style>
@@ -30,7 +30,7 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="MyTextInputLayout" parent="AppTheme">
+    <style name="MyTextInputLayout" parent="LuhnAppTheme">
         <item name="colorAccent">@color/ln_colorHint</item>
         <item name="android:textColorHint">@color/ln_colorHint</item>
         <item name="colorControlNormal">@color/ln_colorHint</item>
@@ -46,7 +46,7 @@
         <item name="android:textColor">@color/ln_colorError</item>
     </style>
 
-    <style name="loadingStyle" parent="AppTheme">
+    <style name="loadingStyle" parent="LuhnAppTheme">
 
         <item name="colorAccent">@color/ln_colorProgress</item>
     </style>

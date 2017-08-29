@@ -15,7 +15,7 @@ android {
 
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -26,6 +26,10 @@ dependencies {
     compile 'com.android.support:design:25.4.0'
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support:support-compat:25.4.0'
-    compile 'io.card:android-sdk:5.5.1'
-    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
+    compile ('io.card:android-sdk:5.5.1'){
+        exclude group: "com.android.support"
+    }
+    compile ('uk.co.chrisjenx:calligraphy:2.3.0'){
+        exclude group: "com.android.support"
+    }
 }

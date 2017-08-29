@@ -418,6 +418,7 @@ public final class Luhn extends BaseActivity implements LuhnCardVerifier {
     }
 
     public void onScanPress(View v) {
+
         Intent scanIntent = new Intent(this, CardIOActivity.class);
         if (getIntent().hasExtra(CARD_IO)) {
             scanIntent.putExtras(getIntent().getBundleExtra(CARD_IO));
