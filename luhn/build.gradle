@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -23,13 +23,13 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:design:25.4.0'
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:support-compat:25.4.0'
-    compile ('io.card:android-sdk:5.5.1'){
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-compat:28.0.0'
+    implementation ('io.card:android-sdk:5.5.1'){
         exclude group: "com.android.support"
     }
-    compile ('uk.co.chrisjenx:calligraphy:2.3.0'){
+    implementation ('uk.co.chrisjenx:calligraphy:2.3.0'){
         exclude group: "com.android.support"
     }
 }
@@ -47,7 +47,7 @@ ext {
     siteUrl = 'https://github.com/KingsMentor/BaseAuth'
     gitUrl = 'https://github.com/KingsMentor/BaseAuth.git'
 
-    libraryVersion = '2.1.3'
+    libraryVersion = '2.1.4'
 
     developerId = 'kingsmentor'
     developerName = 'Nosakhare Belvi'
