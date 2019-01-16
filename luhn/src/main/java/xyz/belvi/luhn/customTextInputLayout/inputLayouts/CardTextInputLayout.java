@@ -15,6 +15,7 @@ import java.lang.reflect.Method;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import xyz.belvi.luhn.customTextInputLayout.transformations.CreditCardTransformation;
 
+// KINDLY CHECK MY GIT REPO FOR MORE
 public class CardTextInputLayout extends TextInputLayout {
     private boolean hasValidInput;
     private Object collapsingTextHelper;
